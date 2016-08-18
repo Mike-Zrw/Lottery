@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F94F25AF-4D9F-4A31-9BA4-039ED59172B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lottery.Core</RootNamespace>
+    <AssemblyName>Lottery.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataModel\BChangeMoney.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BDeskUser.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BDrawMoney.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BLoginLog.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BMasters.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BMessage.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BOperationLog.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BUser.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BUserBankCard.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BUserGroup.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BUserMoney.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BUserType.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\LotteryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PayOnLine.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PReceiveMsg.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PSendMsg.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SDealType.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SMasterRoles.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SMenu.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SMenuPermission.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SPermission.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SRoleMenu.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SRolePermission.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SRoles.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\BDeskUserDto.cs" />
+    <Compile Include="DTO\Common\JsonResult.cs" />
+    <Compile Include="IRepository\IDbContext.cs" />
+    <Compile Include="IRepository\ILotteryRepository.cs" />
+    <Compile Include="IRepository\IRepository.cs" />
+    <Compile Include="IRepository\ICrudRepository.cs" />
+    <Compile Include="IServices\IBDeskUserService.cs" />
+    <Compile Include="IServices\IBUserService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DataModel\LotteryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LotteryModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

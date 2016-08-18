@@ -1,0 +1,10 @@
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\Lottery.Core.dll.config
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\Lottery.Core.dll
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\Lottery.Core.pdb
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\EntityFramework.dll
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\EntityFramework.xml
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\个人项目\Lottery\Lottery.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\个人项目\Lottery\Lottery.Core\obj\Debug\Lottery.Core.dll
+E:\个人项目\Lottery\Lottery.Core\obj\Debug\Lottery.Core.pdb

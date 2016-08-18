@@ -1,0 +1,18 @@
+
+ 
+记录时间：2016-08-02 16:19:13,077 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Lottery.UniteTest.Services property: [(null)] - 
+错误描述：Error
+ 
+System.Exception: 123
+
+ 
+记录时间：2016-08-02 16:20:05,667 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：Lottery.UniteTest.Services property: [(null)] - 
+错误描述：Error
+ 
+System.Exception: 123

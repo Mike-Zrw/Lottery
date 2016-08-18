@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LotteryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BChangeMoney">
+    <Key>
+      <PropertyRef Name="CGM_ID" />
+    </Key>
+    <Property Name="CGM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CGM_USE_ID" Type="int" Nullable="false" />
+    <Property Name="CGM_MONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CGM_SOURSE" Type="varchar" MaxLength="50" />
+    <Property Name="CGM_CREATETIME" Type="datetime" Nullable="false" />
+    <Property Name="CGM_BEFOREMONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CGM_AFTERMONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CGM_DESC" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="BDeskUser">
+    <Key>
+      <PropertyRef Name="DUE_ID" />
+    </Key>
+    <Property Name="DUE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DUE_USE_ID" Type="int" Nullable="false" />
+    <Property Name="DUE_REGISTTIME" Type="datetime" Nullable="false" />
+    <Property Name="DUE_REALNAME" Type="varchar" MaxLength="10" />
+    <Property Name="DUE_PHONE" Type="nvarchar" MaxLength="20" />
+    <Property Name="DUE_USERDSPNAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="DUE_SEX" Type="int" />
+    <Property Name="DUE_EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="DUE_SUT_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BDrawMoney">
+    <Key>
+      <PropertyRef Name="DAM_ID" />
+    </Key>
+    <Property Name="DAM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DAM_DUE_ID" Type="int" Nullable="false" />
+    <Property Name="DAM_CREATETIME" Type="datetime" Nullable="false" />
+    <Property Name="DAM_MONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DAM_DESC" Type="varchar" MaxLength="200" />
+    <Property Name="DAW_STATE" Type="int" Nullable="false" />
+    <Property Name="DAW_MST_ID" Type="int" Nullable="false" />
+    <Property Name="DAW_CONFIRMTIME" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BLoginLog">
+    <Key>
+      <PropertyRef Name="LGL_ID" />
+    </Key>
+    <Property Name="LGL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LGL_USE_ID" Type="int" />
+    <Property Name="LGL_LOGINTYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="LGL_LOGINETIME" Type="datetime" />
+    <Property Name="LGL_IP" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="BMasters">
+    <Key>
+      <PropertyRef Name="MST_ID" />
+    </Key>
+    <Property Name="MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MST_USE_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BMessage">
+    <Key>
+      <PropertyRef Name="MSG_ID" />
+    </Key>
+    <Property Name="MSG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MSG_TITLE" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="MSG_CONTENT" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="MSG_SENDPERSON" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MSG_CREATETIME" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BOperationLog">
+    <Key>
+      <PropertyRef Name="OPL_ID" />
+    </Key>
+    <Property Name="OPL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OPL_USE_ID" Type="int" />
+    <Property Name="OPL_TITLE" Type="nvarchar" MaxLength="50" />
+    <Property Name="OPL_DESC" Type="nvarchar" MaxLength="200" />
+    <Property Name="OPL_CREATETIME" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BUser">
+    <Key>
+      <PropertyRef Name="USE_ID" />
+    </Key>
+    <Property Name="USE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USE_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="USE_PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="USE_ACTIVITY" Type="bit" Nullable="false" />
+    <Property Name="USE_UGP_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BUserBankCard">
+    <Key>
+      <PropertyRef Name="UBC_ID" />
+    </Key>
+    <Property Name="UBC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UBC_USE_ID" Type="int" Nullable="false" />
+    <Property Name="UBC_BANKNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UBC_CARDNUMBER" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BUserGroup">
+    <Key>
+      <PropertyRef Name="UGP_ID" />
+    </Key>
+    <Property Name="UGP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UGP_NAME" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BUserMoney">
+    <Key>
+      <PropertyRef Name="USM_ID" />
+    </Key>
+    <Property Name="USM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USM_USE_ID" Type="int" Nullable="false" />
+    <Property Name="USM_MONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BUserType">
+    <Key>
+      <PropertyRef Name="SUT_ID" />
+    </Key>
+    <Property Name="SUT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUT_DESCRIPTION" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayOnLine">
+    <Key>
+      <PropertyRef Name="POL_ID" />
+    </Key>
+    <Property Name="POL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="POL_CREATETIME" Type="datetime" Nullable="false" />
+    <Property Name="POL_DAT_ID" Type="int" Nullable="false" />
+    <Property Name="POL_MONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="POL_USE_ID" Type="int" Nullable="false" />
+    <Property Name="POL_STATE" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="POL_CONFIRMTIME" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PReceiveMsg">
+    <Key>
+      <PropertyRef Name="RMG_ID" />
+    </Key>
+    <Property Name="RMG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RMG_USE_ID" Type="int" Nullable="false" />
+    <Property Name="RMG_MSG_ID" Type="int" Nullable="false" />
+    <Property Name="RMG_READSTATE" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PSendMsg">
+    <Key>
+      <PropertyRef Name="SMG_ID" />
+    </Key>
+    <Property Name="SMG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SMG_USE_ID" Type="int" Nullable="false" />
+    <Property Name="SMG_MSG_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SDealType">
+    <Key>
+      <PropertyRef Name="DAT_ID" />
+    </Key>
+    <Property Name="DAT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DAT_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DAT_ACTIVITY" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SMasterRoles">
+    <Key>
+      <PropertyRef Name="MTR_ID" />
+    </Key>
+    <Property Name="MTR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MTR_MST_USE_ID" Type="int" Nullable="false" />
+    <Property Name="MTR_ROL_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SMenu">
+    <Key>
+      <PropertyRef Name="MNU_ID" />
+    </Key>
+    <Property Name="MNU_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MNU_TEXTCN" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MNU_TEXTEN" Type="nvarchar" MaxLength="200" />
+    <Property Name="MNU_PARENTID" Type="int" />
+    <Property Name="MNU_SORT" Type="int" />
+    <Property Name="MNU_URL" Type="nvarchar" MaxLength="200" />
+    <Property Name="MNU_IMGURL" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SMenuPermission">
+    <Key>
+      <PropertyRef Name="MPM_ID" />
+    </Key>
+    <Property Name="MPM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MPM_MNU_ID" Type="int" Nullable="false" />
+    <Property Name="MPM_PMS_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“Lottery.dbo.SPermission”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="SPermission">
+    <Key>
+      <PropertyRef Name="PMS_ID" />
+      <PropertyRef Name="PMS_DESCRIPTION" />
+    </Key>
+    <Property Name="PMS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PMS_DESCRIPTION" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PMS_IMGURL" Type="nvarchar" MaxLength="50" />
+    <Property Name="PMS_FUNC" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SRoleMenu">
+    <Key>
+      <PropertyRef Name="RMU_ID" />
+    </Key>
+    <Property Name="RMU_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RMU_ROL_ID" Type="int" Nullable="false" />
+    <Property Name="RMU_MNU_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SRolePermission">
+    <Key>
+      <PropertyRef Name="RPM_ID" />
+    </Key>
+    <Property Name="RPM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RPM_ROL_ID" Type="int" Nullable="false" />
+    <Property Name="RPM_PMS_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SRoles">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ROL_DESCRIPTION" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="LotteryModelStoreContainer">
+    <EntitySet Name="BChangeMoney" EntityType="Self.BChangeMoney" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BDeskUser" EntityType="Self.BDeskUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BDrawMoney" EntityType="Self.BDrawMoney" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BLoginLog" EntityType="Self.BLoginLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BMasters" EntityType="Self.BMasters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BMessage" EntityType="Self.BMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BOperationLog" EntityType="Self.BOperationLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUser" EntityType="Self.BUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUserBankCard" EntityType="Self.BUserBankCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUserGroup" EntityType="Self.BUserGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUserMoney" EntityType="Self.BUserMoney" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BUserType" EntityType="Self.BUserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayOnLine" EntityType="Self.PayOnLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PReceiveMsg" EntityType="Self.PReceiveMsg" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PSendMsg" EntityType="Self.PSendMsg" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SDealType" EntityType="Self.SDealType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMasterRoles" EntityType="Self.SMasterRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMenu" EntityType="Self.SMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMenuPermission" EntityType="Self.SMenuPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SRoleMenu" EntityType="Self.SRoleMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SRolePermission" EntityType="Self.SRolePermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SRoles" EntityType="Self.SRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SPermission" EntityType="Self.SPermission" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SPermission].[PMS_ID] AS [PMS_ID], 
+    [SPermission].[PMS_DESCRIPTION] AS [PMS_DESCRIPTION], 
+    [SPermission].[PMS_IMGURL] AS [PMS_IMGURL], 
+    [SPermission].[PMS_FUNC] AS [PMS_FUNC]
+    FROM [dbo].[SPermission] AS [SPermission]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

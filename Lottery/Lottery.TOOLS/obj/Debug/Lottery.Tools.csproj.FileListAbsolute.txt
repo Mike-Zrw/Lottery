@@ -1,0 +1,8 @@
+E:\个人项目\Lottery\Lottery.Tools\bin\Debug\Lottery.Tools.dll
+E:\个人项目\Lottery\Lottery.Tools\bin\Debug\Lottery.Tools.pdb
+E:\个人项目\Lottery\Lottery.Tools\bin\Debug\Castle.Core.dll
+E:\个人项目\Lottery\Lottery.Tools\bin\Debug\Castle.Windsor.dll
+E:\个人项目\Lottery\Lottery.Tools\bin\Debug\log4net.dll
+E:\个人项目\Lottery\Lottery.Tools\obj\Debug\Lottery.Tools.csprojResolveAssemblyReference.cache
+E:\个人项目\Lottery\Lottery.Tools\obj\Debug\Lottery.Tools.dll
+E:\个人项目\Lottery\Lottery.Tools\obj\Debug\Lottery.Tools.pdb

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout.cshtml</title>
+    <link rel="stylesheet" href="~/Content/Semantic/Semantic/semantic.css" />
+    <script src="~/Content/Semantic/js/jquery-1.10.2.js"></script>
+    <script src="~/Content/Semantic/Semantic/semantic.min.js"></script>
+    <script>
+        $(function () {
+            $('.ui.accordion').accordion();
+            $(".sortable").tablesort()
+        })
+    </script>
+</head>
+<body>
+    <div class="ui  inverted  left vertical  sidebar menu accordion" id="leftmenu">
+        <div class="item">title</div>
+        <div class="item">
+            <div class="header title"><i class="icon home"></i> Introduction<i class="dropdown icon"></i></div>
+            <div class="menu content">
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header title"><i class="icon home"></i> Introduction<i class="dropdown icon"></i></div>
+            <div class="menu content">
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header title"><i class="icon home"></i> Introduction<i class="dropdown icon"></i></div>
+            <div class="menu content">
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+                <p>
+                    <a class="item" href="/introduction/integrations.html">Integrations </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="pusher">
+        <div class="ui inverted menu ">
+            <a title="打开侧边栏" class="launch icon item" onclick="$('#leftmenu').sidebar('toggle')">
+                <i class="content icon"></i>
+            </a>
+            <a class="item">Home </a>
+            <a class="item">Messages </a>
+            <a class="item">Friends </a>
+            <a class="item right">Friends </a>
+        </div>
+        <div class="content">
+           
+            @RenderBody()
+          </div>
+        <div class="ui modal">
+            <div class="header">查询列表</div>
+            <div class="content">
+                <form class="ui form">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="first-name" placeholder="First Name">
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" name="last-name" placeholder="Last Name">
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>I agree to the Terms and Conditions</label>
+                        </div>
+                    </div>
+                    <button class="ui button" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="actions">
+                <div class="ui primary button">确定</div>
+                <div class="ui cancel button">取消</div>
+            </div>
+        </div>
+</body>
+</html>
