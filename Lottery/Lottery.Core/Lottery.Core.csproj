@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -122,6 +125,7 @@
     </Compile>
     <Compile Include="DTO\BDeskUserDto.cs" />
     <Compile Include="DTO\Common\JsonResult.cs" />
+    <Compile Include="DTO\SSC\SSCResult.cs" />
     <Compile Include="IRepository\IDbContext.cs" />
     <Compile Include="IRepository\ILotteryRepository.cs" />
     <Compile Include="IRepository\IRepository.cs" />

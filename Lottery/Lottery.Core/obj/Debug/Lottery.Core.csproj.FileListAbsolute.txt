@@ -8,3 +8,16 @@ E:\个人项目\Lottery\Lottery.Core\bin\Debug\EntityFramework.SqlServer.xml
 E:\个人项目\Lottery\Lottery.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\个人项目\Lottery\Lottery.Core\obj\Debug\Lottery.Core.dll
 E:\个人项目\Lottery\Lottery.Core\obj\Debug\Lottery.Core.pdb
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\Lottery.Core.dll.config
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\Lottery.Core.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\Lottery.Core.pdb
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\EntityFramework.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\log4net.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\EntityFramework.xml
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\log4net.xml
+E:\GitProject\Lottery\Lottery\Lottery.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\obj\Debug\Lottery.Core.csprojResolveAssemblyReference.cache
+E:\GitProject\Lottery\Lottery\Lottery.Core\obj\Debug\Lottery.Core.dll
+E:\GitProject\Lottery\Lottery\Lottery.Core\obj\Debug\Lottery.Core.pdb

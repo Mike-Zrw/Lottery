@@ -50,3 +50,5 @@ E:\个人项目\Lottery\Lottery.Web\bin\zh-Hans\System.Web.WebPages.Razor.resour
 E:\个人项目\Lottery\Lottery.Web\obj\Debug\Lottery.Web.csprojResolveAssemblyReference.cache
 E:\个人项目\Lottery\Lottery.Web\obj\Debug\Lottery.Web.dll
 E:\个人项目\Lottery\Lottery.Web\obj\Debug\Lottery.Web.pdb
+E:\GitProject\Lottery\Lottery\Lottery.Web\obj\Debug\Lottery.Web.csprojResolveAssemblyReference.cache
+E:\GitProject\Lottery\Lottery\Lottery.Web\obj\Debug\Lottery.Web.dll
