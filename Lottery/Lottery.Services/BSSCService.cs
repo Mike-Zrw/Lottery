@@ -54,8 +54,21 @@ namespace Lottery.Service
 
         public AjaxResult<List<BSSC>> GetBSSC(BSSC bSSC)
         {
-            List<BSSC> list = _ssc.Where(m => (m.SSC_DATE == bSSC.SSC_DATE || bSSC.SSC_DATE == null) && (m.SSC_STATE == bSSC.SSC_STATE || bSSC.SSC_STATE == null) && (m.SSC_NO == bSSC.SSC_NO || bSSC.SSC_NO == null)).ToList();
+            List<BSSC> list = _ssc.Where(m => m.SSC_NUMBER != null && (m.SSC_DATE == bSSC.SSC_DATE || bSSC.SSC_DATE == null) && (m.SSC_STATE == bSSC.SSC_STATE || bSSC.SSC_STATE == null) && (m.SSC_NO == bSSC.SSC_NO || bSSC.SSC_NO == null)).ToList();
             return new AjaxResult<List<BSSC>>(list);
+        }
+
+        public AjaxResult<BSSC> GetNextSSC()
+        {
+            BSSC ssc = _ssc.Where(m => m.SSC_NUMBER == null && m.SSC_DATE == DateTime.Now).OrderBy(m => m.SSC_NO).FirstOrDefault();
+            if (ssc == null || ssc.SSC_ID == 0)
+            {
+                return new AjaxResult<BSSC>(false, "今日已结束");
+            }
+            else
+            {
+                return new AjaxResult<BSSC>(ssc);
+            }
         }
     }
 }

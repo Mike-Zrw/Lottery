@@ -1,4 +1,5 @@
 ﻿using Lottery.Core.DataModel;
+using Lottery.Core.DTO.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Lottery.Core.IServices
         DataModel.BSSC AddFromRemote(DataModel.BSSC data);
 
         DTO.Common.AjaxResult<List<BSSC>> GetBSSC(DataModel.BSSC bSSC);
+        AjaxResult<BSSC> GetNextSSC();
     }
 }

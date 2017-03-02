@@ -1,4 +1,5 @@
-﻿using Lottery.Core.DTO;
+﻿using Lottery.Api.Tasks;
+using Lottery.Core.DTO;
 using Lottery.Core.DTO.Common;
 using Lottery.Core.IServices;
 using Lottery.Tools;
@@ -6,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace Lottery.Api.Controllers
 {
@@ -33,9 +32,16 @@ namespace Lottery.Api.Controllers
             {
                 return new AjaxResult<string>(false, "此手机号已经注册过");
             }
-            int number = new Random().Next(1000, 9999);
-            DataCache.SetCache(mobile + "zcyzm", number, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
-            return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
+            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile);
+            if (sendResult.Success)
+            {
+                DataCache.SetCache(mobile + "zcyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
+                return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
+            }
+            else
+            {
+                return new AjaxResult<string>(false, "短信发送失败：" + sendResult.Error);
+            }
         }
         /// <summary>
         /// 注册验证码核对
@@ -59,6 +65,7 @@ namespace Lottery.Api.Controllers
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
+        [HttpGet]
         public AjaxResult<string> Login_GetYzm(string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
@@ -66,9 +73,16 @@ namespace Lottery.Api.Controllers
             {
                 return new AjaxResult<string>(false, "此手机号没有注册过");
             }
-            int number = new Random().Next(1000, 9999);
-            DataCache.SetCache(mobile + "dlyzm", number, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
-            return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
+            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile);
+            if (sendResult.Success)
+            {
+                DataCache.SetCache(mobile + "dlyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
+                return new AjaxResult<string>(true, "短信已经发至您的手机上");
+            }
+            else
+            {
+                return new AjaxResult<string>(false, "短信发送失败：" + sendResult.Error);
+            }
         }
         /// <summary>
         /// 登陆验证码核对
