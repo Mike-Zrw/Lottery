@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BDeskUserService.cs" />
+    <Compile Include="BSSCService.cs" />
     <Compile Include="BUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

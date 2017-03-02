@@ -24,23 +24,22 @@ namespace Lottery.UniteTest
         }
         public List<BUser> FindUsers()
         {
-            LogHelper.WriteError(typeof(Services), new Exception("123"));
             return userSer.FindBUser(new BUser()).ToList();
         }
-        public JsonResult<IEnumerable<BUser>> DeleteUsers()
+        public AjaxResult<IEnumerable<BUser>> DeleteUsers()
         {
             BUser[] users = new BUser[] { new BUser() { USE_ID = 4 }, new BUser() { USE_ID = 5 } };
             return userSer.DeleteRange(users);
         }
-        public JsonResult<BDeskUserDto> RegistDeskUser()
+        public AjaxResult<BDeskUserDto> RegistDeskUser()
         {
             return deskuserSer.Register(new BDeskUserDto() { 
    DUE_EMAIL="@", DUE_SUT_ID=1,DUE_SEX=1, DUE_REALNAME="zs", DUE_PHONE="123123", DUE_USERDSPNAME="123", USE_ACTIVITY=true, USE_NAME="123", USE_PASSWORD="123", USE_UGP_ID=1            
             });
         }
-        public List<BDeskUserDto> findDescUser()
+        public List<BDeskUserDto> FindBDeskUser()
         {
-            return deskuserSer.FindBDescUser(new BDeskUserDto()).ToList();
+            return deskuserSer.FindBDeskUser(new BDeskUserDto()).ToList();
         }
 
     }

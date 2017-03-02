@@ -26,7 +26,6 @@ namespace Lottery.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BChangeMoney> BChangeMoney { get; set; }
         public virtual DbSet<BDeskUser> BDeskUser { get; set; }
         public virtual DbSet<BDrawMoney> BDrawMoney { get; set; }
         public virtual DbSet<BLoginLog> BLoginLog { get; set; }
@@ -49,5 +48,10 @@ namespace Lottery.Repository
         public virtual DbSet<SRolePermission> SRolePermission { get; set; }
         public virtual DbSet<SRoles> SRoles { get; set; }
         public virtual DbSet<SPermission> SPermission { get; set; }
+        public virtual DbSet<BSSC_DUE_BUY> BSSC_DUE_BUY { get; set; }
+        public virtual DbSet<BSSC_SUCCESS_BUY> BSSC_SUCCESS_BUY { get; set; }
+        public virtual DbSet<RSSC_TYPE> RSSC_TYPE { get; set; }
+        public virtual DbSet<BChangeMoney> BChangeMoney { get; set; }
+        public virtual DbSet<BSSC> BSSC { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace Lottery.Core.IServices
     {
         IQueryable<BUser> FindBUser(BUser users);
         List<BUser> FindBUserList(BUser users);
-        JsonResult<IEnumerable<BUser>> DeleteRange(BUser[] users);
+        AjaxResult<IEnumerable<BUser>> DeleteRange(BUser[] users);
     }
 }

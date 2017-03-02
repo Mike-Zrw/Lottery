@@ -1,38 +1,50 @@
-﻿using log4net;
-using Lottery.ApiReference;
+﻿using Autofac;
+using Lottery.Core.IRepository;
+using Lottery.Core.IServices;
+using Lottery.Repository;
+using Lottery.Service;
+using Lottery.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Autofac.Integration.Mvc;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.IO;
+using Autofac.Integration.WebApi;
 
 namespace Lottery.Api
 {
-    // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
-    // 请访问 http://go.microsoft.com/?LinkId=9394801
-
-    public class WebApiApplication : System.Web.HttpApplication
+    public class MvcApplication : System.Web.HttpApplication
     {
-        private readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected void Application_Start()
         {
+            SetupResolveRules();
             AreaRegistration.RegisterAllAreas();
-
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            RefreshSSCData();
+            Tasks.Tasks.Init();
         }
 
-        private void RefreshSSCData()
+        private void SetupResolveRules()
         {
-            SSCApiReference ssc = new SSCApiReference();
-            string data=ssc.GetSSCData();
-            _log.Info(data);
+            var builder = new ContainerBuilder();
+            //容器
+            builder.RegisterType<LotteryContext>().As<ILotteryDbContext>();
+            builder.RegisterGeneric(typeof(CrudRepository<>)).As(typeof(ICrudRepository<>));
+            builder.RegisterAssemblyTypes(Assembly.Load("Lottery.Service")).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.Load("Lottery.Repository")).AsImplementedInterfaces(); 
+            //注册主项目的Controllers
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            IoC.Build = builder;
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(IoC.Container);  //webapi
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container)); //controller
         }
     }
 }

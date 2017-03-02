@@ -1,4 +1,5 @@
-﻿using Lottery.Core.DataModel;
+﻿using log4net;
+using Lottery.Core.DataModel;
 using Lottery.Core.DTO;
 using Lottery.Core.DTO.Common;
 using Lottery.Core.IRepository;
@@ -14,6 +15,7 @@ namespace Lottery.Service
 {
     public class BDeskUserService : IBDeskUserService
     {
+        private readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ILotteryRepository repository;
         private ICrudRepository<BUser> userRpt;
         private ICrudRepository<BDeskUser> deskUserRpt;
@@ -24,11 +26,15 @@ namespace Lottery.Service
             userRpt = repository.GetCrudRepository<BUser>();
             deskUserRpt = repository.GetCrudRepository<BDeskUser>();
         }
-        public JsonResult<BDeskUserDto> Register(BDeskUserDto user)
+        public AjaxResult<BDeskUserDto> Register(BDeskUserDto user)
         {
             if (userRpt.Where(m => m.USE_NAME.ToLower().Trim().Equals(user.USE_NAME.ToLower().Trim())).Count() > 0)
             {
-                return new JsonResult<BDeskUserDto>(false, "用户名已存在");
+                return new AjaxResult<BDeskUserDto>(false, "用户名已存在");
+            }
+            else if (!string.IsNullOrWhiteSpace(user.DUE_PHONE)&&deskUserRpt.Where(m=>m.DUE_PHONE==user.DUE_PHONE).Count()>0)
+            {
+                return new AjaxResult<BDeskUserDto>(false, "此手机号已经注册过");
             }
             try
             {
@@ -41,6 +47,7 @@ namespace Lottery.Service
                     USE_UGP_ID = user.USE_UGP_ID
                 });
                 repository.Save();
+
                 BDeskUser bdescuser = deskUserRpt.Add(new BDeskUser()
                 {
                     DUE_EMAIL = user.DUE_EMAIL,
@@ -52,19 +59,20 @@ namespace Lottery.Service
                     DUE_USE_ID = buser.USE_ID,
                     DUE_USERDSPNAME = user.DUE_USERDSPNAME
                 });
+
                 repository.Save();
                 repository.Commit();
-                return new JsonResult<BDeskUserDto>(DescUserToDto(buser, bdescuser));
+                return new AjaxResult<BDeskUserDto>(DeskUserToDto(buser, bdescuser));
             }
             catch (Exception ex)
             {
                 repository.RollBack();
-                LogHelper.WriteError(GetType(), ex.Message.ToString());
-                return new JsonResult<BDeskUserDto>(false, "执行数据插入出错");
+                _log.Error(ex);
+                return new AjaxResult<BDeskUserDto>(false, "执行数据插入出错");
             }
         }
 
-        private static BDeskUserDto DescUserToDto(BUser buser, BDeskUser bdescuser)
+        private static BDeskUserDto DeskUserToDto(BUser buser, BDeskUser bdescuser)
         {
             return new BDeskUserDto()
             {
@@ -85,10 +93,10 @@ namespace Lottery.Service
             };
         }
 
-        public IQueryable<BDeskUserDto> FindBDescUser(BDeskUserDto user)
+        public IQueryable<BDeskUserDto> FindBDeskUser(BDeskUserDto user)
         {
             var query = from du in deskUserRpt.Where(m => m.DUE_PHONE == user.DUE_PHONE || user.DUE_PHONE == null)
-                        join u in userRpt.Where(m => (m.USE_NAME == user.USE_NAME || user.USE_NAME == null)) on du.DUE_USE_ID equals u.USE_ID
+                        join u in userRpt.Where(m => (m.USE_NAME == user.USE_NAME || user.USE_NAME == null) && (m.USE_PASSWORD == user.USE_PASSWORD || user.USE_PASSWORD == null)) on du.DUE_USE_ID equals u.USE_ID
                         select new BDeskUserDto
                         {
                             DUE_EMAIL = du.DUE_EMAIL,
@@ -109,15 +117,15 @@ namespace Lottery.Service
             return query;
         }
 
-        public JsonResult<BDeskUserDto> Login(string name, string pass)
+        public AjaxResult<BDeskUserDto> Login(string name, string pass)
         {
             BUser user = userRpt.Where(m => (m.USE_NAME == name) && (m.USE_PASSWORD == Md5.MD5(pass))).SingleOrDefault();
             if (user == null)
-                return new JsonResult<BDeskUserDto>(false, "用户名或密码错误");
+                return new AjaxResult<BDeskUserDto>(false, "用户名或密码错误");
             if (user.USE_ACTIVITY == false)
-                return new JsonResult<BDeskUserDto>(false, "账号已被禁用");
+                return new AjaxResult<BDeskUserDto>(false, "账号已被禁用");
             BDeskUser deskuser = deskUserRpt.Where(m => m.DUE_USE_ID == user.USE_ID).SingleOrDefault();
-            return new JsonResult<BDeskUserDto>(DescUserToDto(user, deskuser));
+            return new AjaxResult<BDeskUserDto>(DeskUserToDto(user, deskuser));
         }
     }
 }

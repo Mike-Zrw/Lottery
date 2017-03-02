@@ -12,10 +12,15 @@ namespace Lottery.Repository
     /// </summary>
     public class LotteryRepository :EfRepository, ILotteryRepository
     {
-        private ILotteryDbContext DbContext;
+        private LotteryContext DbContext
+        {
+            get
+            {
+                return _dbContext as LotteryContext;
+            }
+        }
         public LotteryRepository(ILotteryDbContext DbContext):base(DbContext)
         {
-            this.DbContext = DbContext;
         }
         protected override void Dispose(bool disposing)
         {

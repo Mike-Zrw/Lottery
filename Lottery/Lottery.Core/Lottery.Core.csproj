@@ -70,6 +70,15 @@
     <Compile Include="DataModel\BOperationLog.cs">
       <DependentUpon>LotteryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\BSSC.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BSSC_DUE_BUY.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\BSSC_SUCCESS_BUY.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\BUser.cs">
       <DependentUpon>LotteryModel.tt</DependentUpon>
     </Compile>
@@ -99,6 +108,9 @@
     <Compile Include="DataModel\PSendMsg.cs">
       <DependentUpon>LotteryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\RSSC_TYPE.cs">
+      <DependentUpon>LotteryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\SDealType.cs">
       <DependentUpon>LotteryModel.tt</DependentUpon>
     </Compile>
@@ -124,13 +136,14 @@
       <DependentUpon>LotteryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\BDeskUserDto.cs" />
-    <Compile Include="DTO\Common\JsonResult.cs" />
+    <Compile Include="DTO\Common\AjaxResult.cs" />
     <Compile Include="DTO\SSC\SSCResult.cs" />
     <Compile Include="IRepository\IDbContext.cs" />
     <Compile Include="IRepository\ILotteryRepository.cs" />
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="IRepository\ICrudRepository.cs" />
     <Compile Include="IServices\IBDeskUserService.cs" />
+    <Compile Include="IServices\IBSSCService.cs" />
     <Compile Include="IServices\IBUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

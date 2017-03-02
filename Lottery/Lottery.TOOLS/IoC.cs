@@ -1,5 +1,4 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.Windsor;
+﻿using Autofac;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,31 +17,35 @@ namespace Lottery.Tools
     public class IoC
     {
         private static readonly object LockObj = new object();
-
-        private static IWindsorContainer container = new WindsorContainer();
-
-        public static IWindsorContainer Container
+        private static ContainerBuilder build;
+        private static IContainer container;
+        static IoC()
         {
-            get { return container; }
+            build = new ContainerBuilder(); 
+            container = build.Build();
+        }
+        public static ContainerBuilder Build
+        {
+            get { return build; }
 
             set
             {
                 lock (LockObj)
                 {
-                    container = value;
+                    build = value;
+                    container = build.Build();
                 }
             }
         }
-
+        public static IContainer Container
+        {
+            get { return container; }
+        }
         public static T Resolve<T>()
         {
             return container.Resolve<T>();
         }
 
-        public static T Resolve<T>(string key) where T : class
-        {
-            return container.Resolve(key, typeof(T)) as T;
-        }
 
         public static object Resolve(Type type)
         {

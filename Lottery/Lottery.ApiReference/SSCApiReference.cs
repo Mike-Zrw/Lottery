@@ -6,19 +6,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Formatting;
 using Lottery.Core.DTO.SSC;
+using Lottery.Core.DataModel;
+using System.Xml;
 
 namespace Lottery.ApiReference
 {
     public class SSCApiReference : Base_SSCApiReference
     {
-        public string  GetSSCData()
+        /// <summary>
+        /// 获取最新一期数据
+        /// </summary>
+        /// <returns></returns>
+        public BSSC GetSSCData()
         {
-            using (HttpResponseMessage response = HttpClient.GetAsync("data/cqssc.json").Result)
+            using (HttpResponseMessage response = HttpClient.GetAsync("static/public/ssc/xml/qihaoxml/" + DateTime.Now.ToString("yyyyMMdd") + ".xml?_A=" + new Guid().ToString()).Result)
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    SSCResult result = response.Content.ReadAsAsync<SSCResult>().Result;
-                    return "";
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(result);
+                   XmlNode root=xmlDoc.SelectSingleNode("xml");
+                   if (root.ChildNodes.Count>0)
+                   {
+
+                       XmlNode node = root.FirstChild; 
+                       BSSC ssc = new BSSC()
+                       {
+                           SSC_NO = node.Attributes["expect"].Value,
+                           SSC_NUMBER = node.Attributes["opencode"].Value
+                       };
+                       return ssc;
+                   }
+
                 }
             }
             return null;

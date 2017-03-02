@@ -94,5 +94,11 @@ namespace Lottery.Repository
 
         #endregion 关闭连接
 
+
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }

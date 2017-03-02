@@ -23,7 +23,10 @@ namespace Lottery.Core.IRepository
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         bool Any(Expression<Func<TEntity, bool>> predicate);
-
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        void Save();
         void SetDbContext(System.Data.Entity.DbContext _dbContext);
     }
 }

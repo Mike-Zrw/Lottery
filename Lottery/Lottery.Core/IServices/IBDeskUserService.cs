@@ -11,8 +11,8 @@ namespace Lottery.Core.IServices
 {
     public interface IBDeskUserService
     {
-        JsonResult<BDeskUserDto> Login(string name, string pass);
-        JsonResult<BDeskUserDto> Register(BDeskUserDto dto);
-        IQueryable<BDeskUserDto> FindBDescUser(BDeskUserDto dto);
+        AjaxResult<BDeskUserDto> Login(string name, string pass);
+        AjaxResult<BDeskUserDto> Register(BDeskUserDto dto);
+        IQueryable<BDeskUserDto> FindBDeskUser(BDeskUserDto dto);
     }
 }
