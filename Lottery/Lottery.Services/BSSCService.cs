@@ -1,0 +1,61 @@
+﻿using Lottery.Core.DataModel;
+using Lottery.Core.DTO.Common;
+using Lottery.Core.IRepository;
+using Lottery.Core.IServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lottery.Service
+{
+    public class BSSCService : IBSSCService
+    {
+        private ILotteryRepository _repository;
+        private ICrudRepository<BSSC> _ssc;
+        public BSSCService(ILotteryRepository repository)
+        {
+            _repository = repository;
+            _ssc = repository.GetCrudRepository<BSSC>();
+        }
+        public BSSC AddFromRemote(BSSC data)
+        {
+            BSSC ssc = _ssc.Where(m => m.SSC_NO == data.SSC_NO).FirstOrDefault();
+            if (ssc == null || ssc.SSC_ID == 0)
+            {
+                data.SSC_DATE = DateTime.Now;
+                data.SSC_WRITEDT = DateTime.Now;
+                data.SSC_STATE = 0;
+                data = _ssc.Add(data);
+                int num = Convert.ToInt32(data.SSC_NO.Substring(8));
+                _ssc.Save();
+                for (int i = num + 1; i <= 120; i++)
+                {
+                    _ssc.Add(new BSSC()
+                    {
+                        SSC_DATE = DateTime.Now,
+                        SSC_STATE = 0,
+                        SSC_NO = DateTime.Now.ToString("yyyyMMdd") + i.ToString("000")
+                    });
+                }
+                _ssc.Save();
+            }
+            else
+            {
+                ssc.SSC_NUMBER = data.SSC_NUMBER;
+                ssc.SSC_WRITEDT = DateTime.Now;
+                _ssc.Save();
+                data = ssc;
+            }
+            return data;
+        }
+
+
+        public AjaxResult<List<BSSC>> GetBSSC(BSSC bSSC)
+        {
+            List<BSSC> list = _ssc.Where(m => (m.SSC_DATE == bSSC.SSC_DATE || bSSC.SSC_DATE == null) && (m.SSC_STATE == bSSC.SSC_STATE || bSSC.SSC_STATE == null) && (m.SSC_NO == bSSC.SSC_NO || bSSC.SSC_NO == null)).ToList();
+            return new AjaxResult<List<BSSC>>(list);
+        }
+    }
+}

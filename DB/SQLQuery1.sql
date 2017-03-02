@@ -3,7 +3,7 @@ CREATE TABLE [BUser](
     [USE_ID] [int] IDENTITY(1,1)  primary key,
     [USE_NAME] [nvarchar](50) not null,--帐号
     [USE_PASSWORD] [nvarchar](50) not null ,
-    [USE_ACTIVITY] [bit] not null,		--是否可用
+    [USE_ACTIVITY] [bit] not null,		--是否可用	
     USE_UGP_ID [int] not null
 )
 --用户分组表
@@ -172,3 +172,40 @@ Create table PReceiveMsg(
 	RMG_READSTATE int not null, --阅读状态
 )
 
+
+
+-----------------彩票号码--------------------------
+--时时彩开奖记录表--
+create table BSSC(
+	SSC_ID int identity(1,1) primary key,
+	SSC_NO int, --期号
+	SSC_NUMBER varchar(20),--开奖号
+	SSC_DATE date not null, --开奖日期
+	SSC_WRITEDT datetime, --写入日期（抓取日期）
+	SSC_STATE int, --比对状态  0 未必对 1 已比对
+)
+--时时彩玩法表---（一星二星三星。。。）
+create table RSSC_TYPE(
+	RST_ID int identity(1,1) primary key,
+	RST_NAME varchar(20) not null,
+	RST_PARENT_ID int not null,--父id，例如三星直选的父为三星
+)
+--时时彩购买记录表--
+CREATE TABLE BSSC_DUE_BUY(
+	SCD_ID int identity(1,1) primary key,
+	SCD_DUE_ID int not null,
+	SCD_DAT_ID int not null,--支付方式
+	SCD_DATE date not null,
+	SCD_SCC_NO date not null,
+	SCD_NUMBERS nvarchar(200) not null, --购买彩票号码，以自定义的规则进行拼接写入
+	SCD_TIMES int not null, --倍数 默认1倍
+	SCD_STATE int not null, --比对状态  0未比对，1 已中奖 2未中奖
+)
+
+--时时彩中奖纪录表--
+CREATE TABLE BSSC_SUCCESS_BUY(
+	SSB_ID int identity(1,1) primary key,
+	SSB_DATE date not null,
+	SSB_SCD_ID int not null,
+	SSB_MONEY date not null,  --中奖金额
+)
