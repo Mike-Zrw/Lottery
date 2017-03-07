@@ -144,7 +144,6 @@
     <Compile Include="IRepository\ICrudRepository.cs" />
     <Compile Include="IServices\IBDeskUserService.cs" />
     <Compile Include="IServices\IBSSCService.cs" />
-    <Compile Include="IServices\IBSSC_DUE_BUYService.cs" />
     <Compile Include="IServices\IBUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

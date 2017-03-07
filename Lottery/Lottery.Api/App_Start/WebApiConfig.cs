@@ -11,7 +11,7 @@ namespace Lottery.Api
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
-            config.EnableCors(); //配置跨域
+            config.EnableCors();
             // Web API 路由
             config.MapHttpAttributeRoutes();
 

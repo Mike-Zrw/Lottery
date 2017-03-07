@@ -7,9 +7,6 @@ using System.Web;
 
 namespace Lottery.Api.Tasks
 {
-    /// <summary>
-    /// 总任务控制中心
-    /// </summary>
     public class Tasks
     {
         public static void Init()
