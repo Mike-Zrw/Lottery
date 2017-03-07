@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BDeskUserService.cs" />
     <Compile Include="BSSCService.cs" />
+    <Compile Include="BSSC_DUE_BUYService.cs" />
     <Compile Include="BUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

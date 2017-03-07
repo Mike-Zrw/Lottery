@@ -29,9 +29,12 @@ namespace Lottery.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Tasks.Tasks.Init();
+            Tasks.Tasks.Init(); //开启任务
         }
 
+        /// <summary>
+        /// Autofac Ioc注册
+        /// </summary>
         private void SetupResolveRules()
         {
             var builder = new ContainerBuilder();

@@ -23,6 +23,12 @@ namespace Lottery.Api.Tasks
         public HttpClient _httpClient;
         public static readonly string NetEaseSMSUri = ConfigurationManager.AppSettings["NetEaseSMSUri"].ToString();
 
+        /// <summary>
+        /// 发送验证码短信，返回验证码
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="templateid"></param>
+        /// <returns></returns>
         public AjaxResult<int> SendMsg(string phone, int templateid)
         {
             string appKey = ConfigurationManager.AppSettings["appKey"].ToString();//appkey由网易云信提供  

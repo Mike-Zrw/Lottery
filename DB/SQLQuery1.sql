@@ -193,6 +193,7 @@ create table RSSC_TYPE(
 --时时彩购买记录表--
 CREATE TABLE BSSC_DUE_BUY(
 	SCD_ID int identity(1,1) primary key,
+	SCD_RST_ID int not null,
 	SCD_DUE_ID int not null,
 	SCD_DAT_ID int not null,--支付方式
 	SCD_DATE date not null,
