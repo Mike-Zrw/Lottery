@@ -27,11 +27,11 @@
         <EntityTypeShape EntityType="LotteryModel.SRolePermission" Width="1.5" PointX="8.75" PointY="10.75" />
         <EntityTypeShape EntityType="LotteryModel.SRoles" Width="1.5" PointX="10.75" PointY="10.75" />
         <EntityTypeShape EntityType="LotteryModel.SPermission" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LotteryModel.BSSC_DUE_BUY" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="LotteryModel.BSSC_SUCCESS_BUY" Width="1.5" PointX="13.75" PointY="3.75" />
         <EntityTypeShape EntityType="LotteryModel.RSSC_TYPE" Width="1.5" PointX="5.75" PointY="13.75" />
         <EntityTypeShape EntityType="LotteryModel.BChangeMoney" Width="1.5" PointX="8.375" PointY="13.75" />
         <EntityTypeShape EntityType="LotteryModel.BSSC" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="LotteryModel.BSSC_DUE_BUY" Width="1.5" PointX="0.75" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -197,7 +197,7 @@ CREATE TABLE BSSC_DUE_BUY(
 	SCD_DUE_ID int not null,
 	SCD_DAT_ID int not null,--支付方式
 	SCD_DATE date not null,
-	SCD_SCC_NO date not null,
+	SCD_SCC_NO int not null,
 	SCD_NUMBERS nvarchar(200) not null, --购买彩票号码，以自定义的规则进行拼接写入
 	SCD_TIMES int not null, --倍数 默认1倍
 	SCD_STATE int not null, --比对状态  0未比对，1 已中奖 2未中奖

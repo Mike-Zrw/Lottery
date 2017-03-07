@@ -103,7 +103,7 @@
           <Property Name="SCD_DUE_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DAT_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DATE" Type="date" Nullable="false" />
-          <Property Name="SCD_SCC_NO" Type="date" Nullable="false" />
+          <Property Name="SCD_SCC_NO" Type="int" Nullable="false" />
           <Property Name="SCD_NUMBERS" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="SCD_TIMES" Type="int" Nullable="false" />
           <Property Name="SCD_STATE" Type="int" Nullable="false" />
@@ -329,11 +329,11 @@
           <EntitySet Name="SRolePermission" EntityType="LotteryModel.SRolePermission" />
           <EntitySet Name="SRoles" EntityType="LotteryModel.SRoles" />
           <EntitySet Name="SPermission" EntityType="LotteryModel.SPermission" />
-          <EntitySet Name="BSSC_DUE_BUY" EntityType="LotteryModel.BSSC_DUE_BUY" />
           <EntitySet Name="BSSC_SUCCESS_BUY" EntityType="LotteryModel.BSSC_SUCCESS_BUY" />
           <EntitySet Name="RSSC_TYPE" EntityType="LotteryModel.RSSC_TYPE" />
           <EntitySet Name="BChangeMoney" EntityType="LotteryModel.BChangeMoney" />
           <EntitySet Name="BSSC" EntityType="LotteryModel.BSSC" />
+          <EntitySet Name="BSSC_DUE_BUY" EntityType="LotteryModel.BSSC_DUE_BUY" />
         </EntityContainer>
         <EntityType Name="BDeskUser">
           <Key>
@@ -538,20 +538,6 @@
           <Property Name="PMS_IMGURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PMS_FUNC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="BSSC_DUE_BUY">
-          <Key>
-            <PropertyRef Name="SCD_ID" />
-          </Key>
-          <Property Name="SCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SCD_DUE_ID" Type="Int32" Nullable="false" />
-          <Property Name="SCD_DAT_ID" Type="Int32" Nullable="false" />
-          <Property Name="SCD_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SCD_SCC_NO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SCD_NUMBERS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SCD_TIMES" Type="Int32" Nullable="false" />
-          <Property Name="SCD_STATE" Type="Int32" Nullable="false" />
-          <Property Name="SCD_RST_ID" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="BSSC_SUCCESS_BUY">
           <Key>
             <PropertyRef Name="SSB_ID" />
@@ -593,6 +579,20 @@
           <Property Name="SSC_DATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SSC_WRITEDT" Type="DateTime" Precision="3" />
           <Property Name="SSC_STATE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="BSSC_DUE_BUY">
+          <Key>
+            <PropertyRef Name="SCD_ID" />
+          </Key>
+          <Property Name="SCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SCD_RST_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DUE_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DAT_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SCD_SCC_NO" Type="Int32" Nullable="false" />
+          <Property Name="SCD_NUMBERS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SCD_TIMES" Type="Int32" Nullable="false" />
+          <Property Name="SCD_STATE" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -824,21 +824,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BSSC_DUE_BUY">
-            <EntityTypeMapping TypeName="LotteryModel.BSSC_DUE_BUY">
-              <MappingFragment StoreEntitySet="BSSC_DUE_BUY">
-                <ScalarProperty Name="SCD_RST_ID" ColumnName="SCD_RST_ID" />
-                <ScalarProperty Name="SCD_STATE" ColumnName="SCD_STATE" />
-                <ScalarProperty Name="SCD_TIMES" ColumnName="SCD_TIMES" />
-                <ScalarProperty Name="SCD_NUMBERS" ColumnName="SCD_NUMBERS" />
-                <ScalarProperty Name="SCD_SCC_NO" ColumnName="SCD_SCC_NO" />
-                <ScalarProperty Name="SCD_DATE" ColumnName="SCD_DATE" />
-                <ScalarProperty Name="SCD_DAT_ID" ColumnName="SCD_DAT_ID" />
-                <ScalarProperty Name="SCD_DUE_ID" ColumnName="SCD_DUE_ID" />
-                <ScalarProperty Name="SCD_ID" ColumnName="SCD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BSSC_SUCCESS_BUY">
             <EntityTypeMapping TypeName="LotteryModel.BSSC_SUCCESS_BUY">
               <MappingFragment StoreEntitySet="BSSC_SUCCESS_BUY">
@@ -881,6 +866,21 @@
                 <ScalarProperty Name="SSC_NUMBER" ColumnName="SSC_NUMBER" />
                 <ScalarProperty Name="SSC_NO" ColumnName="SSC_NO" />
                 <ScalarProperty Name="SSC_ID" ColumnName="SSC_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BSSC_DUE_BUY">
+            <EntityTypeMapping TypeName="LotteryModel.BSSC_DUE_BUY">
+              <MappingFragment StoreEntitySet="BSSC_DUE_BUY">
+                <ScalarProperty Name="SCD_STATE" ColumnName="SCD_STATE" />
+                <ScalarProperty Name="SCD_TIMES" ColumnName="SCD_TIMES" />
+                <ScalarProperty Name="SCD_NUMBERS" ColumnName="SCD_NUMBERS" />
+                <ScalarProperty Name="SCD_SCC_NO" ColumnName="SCD_SCC_NO" />
+                <ScalarProperty Name="SCD_DATE" ColumnName="SCD_DATE" />
+                <ScalarProperty Name="SCD_DAT_ID" ColumnName="SCD_DAT_ID" />
+                <ScalarProperty Name="SCD_DUE_ID" ColumnName="SCD_DUE_ID" />
+                <ScalarProperty Name="SCD_RST_ID" ColumnName="SCD_RST_ID" />
+                <ScalarProperty Name="SCD_ID" ColumnName="SCD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
