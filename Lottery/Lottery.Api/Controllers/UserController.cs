@@ -25,6 +25,7 @@ namespace Lottery.Api.Controllers
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
+        [HttpGet]
         public AjaxResult<string> Register_GetYzm(string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
@@ -32,10 +33,10 @@ namespace Lottery.Api.Controllers
             {
                 return new AjaxResult<string>(false, "此手机号已经注册过");
             }
-            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile);
+            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile, 3049151);
             if (sendResult.Success)
             {
-                DataCache.SetCache(mobile + "zcyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
+                DataCache.SetCache(mobile + "zcyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60),TimeSpan.Zero);
                 return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
             }
             else
@@ -73,10 +74,10 @@ namespace Lottery.Api.Controllers
             {
                 return new AjaxResult<string>(false, "此手机号没有注册过");
             }
-            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile);
+            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile, 3064048);
             if (sendResult.Success)
             {
-                DataCache.SetCache(mobile + "dlyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), new TimeSpan(10));
+                DataCache.SetCache(mobile + "dlyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), TimeSpan.Zero);
                 return new AjaxResult<string>(true, "短信已经发至您的手机上");
             }
             else

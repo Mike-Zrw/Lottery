@@ -21,8 +21,8 @@ namespace Lottery.UniteTest
         {
             WinsorConfig.ConfigRegister();
             Services ser=new Services();
-            JsonResult<IEnumerable<BUser>> re = ser.DeleteUsers();
-            Console.WriteLine(re.Success);
+            //JsonResult<IEnumerable<BUser>> re = ser.DeleteUsers();
+            //Console.WriteLine(re.Success);
             //List<BDeskUserDto> list = ser.findDescUser();
             //Console.WriteLine(list.Count);
             Console.Read();

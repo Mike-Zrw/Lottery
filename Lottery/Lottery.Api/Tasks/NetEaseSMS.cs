@@ -23,7 +23,7 @@ namespace Lottery.Api.Tasks
         public HttpClient _httpClient;
         public static readonly string NetEaseSMSUri = ConfigurationManager.AppSettings["NetEaseSMSUri"].ToString();
 
-        public AjaxResult<int> SendMsg(string phone)
+        public AjaxResult<int> SendMsg(string phone, int templateid)
         {
             string appKey = ConfigurationManager.AppSettings["appKey"].ToString();//appkey由网易云信提供  
             string appSecret = ConfigurationManager.AppSettings["appSecret"].ToString();
@@ -33,8 +33,8 @@ namespace Lottery.Api.Tasks
             Int32 ticks = System.Convert.ToInt32(ts.TotalSeconds);
             String curTime = ticks.ToString();
             String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce, curTime);
-            string post = "mobile=" + phone;
-            string urlEncoded = Uri.EscapeUriString(post.ToString()); 
+            string post = "mobile=" + phone + "&templateid=" + templateid;
+            string urlEncoded = Uri.EscapeUriString(post.ToString());
 
             System.Net.WebRequest wReq = System.Net.WebRequest.Create(NetEaseSMSUri + "sms/sendcode.action?" + urlEncoded);
             wReq.Method = "POST";
@@ -48,12 +48,13 @@ namespace Lottery.Api.Tasks
             System.Net.WebResponse wResp = wReq.GetResponse();
             System.IO.Stream respStream = wResp.GetResponseStream();
 
-            string result;
+            string apiresult;
             using (System.IO.StreamReader reader = new System.IO.StreamReader(respStream, System.Text.Encoding.UTF8))
             {
-                result = reader.ReadToEnd();
+                apiresult = reader.ReadToEnd();
             }
-            return JsonConvert.DeserializeObject<dynamic>(result).obj;
+            AjaxResult<int> result = new AjaxResult<int>(Convert.ToInt32(JsonConvert.DeserializeObject<dynamic>(apiresult).obj));
+            return result;
         }
     }
 

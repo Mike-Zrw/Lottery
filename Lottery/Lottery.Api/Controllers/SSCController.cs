@@ -31,9 +31,10 @@ namespace Lottery.Api.Controllers
         /// 获取今天开奖数据
         /// </summary>
         /// <returns></returns>
+       [HttpPost]
         public AjaxResult<List<BSSC>> GetTodaySSC()
         {
-            return _ssc.GetBSSC(new BSSC() { SSC_DATE = DateTime.Now });
+            return _ssc.GetBSSC(new BSSC() { SSC_DATE = Convert.ToDateTime(DateTime.Now.ToShortDateString()) });
         }
         /// <summary>
         /// 即将开奖数据

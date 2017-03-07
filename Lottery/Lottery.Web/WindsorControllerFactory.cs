@@ -1,4 +1,6 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Lottery.Core.IRepository;
 using Lottery.Core.IServices;
@@ -8,20 +10,17 @@ using Lottery.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Lottery.Web
 {
-    class WindsorControllerFactory:DefaultControllerFactory
+    class WindsorControllerFactory : DefaultControllerFactory
     {
         public WindsorControllerFactory()
         {
-            IoC.Container.Register(
-                Classes.FromThisAssembly().BasedOn<IController>()
-                .WithService.Self()
-                .LifestyleTransient());
             ConfigRegister();
         }
 
@@ -32,12 +31,17 @@ namespace Lottery.Web
         }
         public void ConfigRegister()
         {
-            IoC.Container.Register(Component.For(typeof(ILotteryDbContext)).ImplementedBy(typeof(LotteryContext)).LifeStyle.PerWebRequest);
-            IoC.Container.Register(Classes.FromAssemblyNamed("Lottery.Service")
-                .Pick().WithService.DefaultInterfaces().LifestylePerWebRequest());
-            IoC.Container.Register(Classes.FromAssemblyNamed("Lottery.Repository")
-                .Pick().WithService.DefaultInterfaces().LifestylePerWebRequest());
-            //IoC.Container.Register(AllTypes.FromAssemblyNamed("Lottery.Web").Pick().WithService.FirstInterface().LifestylePerWebRequest());
+            var builder = new ContainerBuilder();
+            //容器
+            builder.RegisterType<LotteryContext>().As<ILotteryDbContext>();
+            builder.RegisterGeneric(typeof(CrudRepository<>)).As(typeof(ICrudRepository<>));
+            builder.RegisterAssemblyTypes(Assembly.Load("Lottery.Service")).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.Load("Lottery.Repository")).AsImplementedInterfaces();
+            //注册主项目的Controllers
+            builder.RegisterControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            IoC.Build = builder;
+            //GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(IoC.Container);  //webapi
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container)); //controller
         }
     }
 }
