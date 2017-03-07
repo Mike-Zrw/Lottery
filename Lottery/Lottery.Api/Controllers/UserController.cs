@@ -25,7 +25,7 @@ namespace Lottery.Api.Controllers
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public AjaxResult<string> Register_GetYzm(string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
@@ -36,7 +36,7 @@ namespace Lottery.Api.Controllers
             AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile, 3049151);
             if (sendResult.Success)
             {
-                DataCache.SetCache(mobile + "zcyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60),TimeSpan.Zero);
+                DataCache.SetCache(mobile + "zcyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), TimeSpan.Zero);
                 return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
             }
             else
@@ -50,6 +50,7 @@ namespace Lottery.Api.Controllers
         /// <param name="mobile">手机号</param>
         /// <param name="yzm">验证码</param>
         /// <returns></returns>
+        [HttpPost]
         public AjaxResult<BDeskUserDto> Register_Reg(string mobile, string yzm)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
@@ -66,7 +67,7 @@ namespace Lottery.Api.Controllers
         /// </summary>
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public AjaxResult<string> Login_GetYzm(string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
@@ -91,13 +92,14 @@ namespace Lottery.Api.Controllers
         /// <param name="mobile">手机号</param>
         /// <param name="yzm">验证码</param>
         /// <returns></returns>
+        [HttpPost]
         public AjaxResult<BDeskUserDto> Login_ByPhone(string mobile, string yzm)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
             if (sum == 0)
                 return new AjaxResult<BDeskUserDto>(false, "此手机号没有注册过");
             object cacheyzm = DataCache.GetCache(mobile + "dlyzm");
-            if (cacheyzm == null || cacheyzm != yzm)
+            if (cacheyzm == null || cacheyzm.ToString() != yzm)
                 return new AjaxResult<BDeskUserDto>(false, "验证码输入错误");
             return _duser.Register(new BDeskUserDto() { USE_NAME = mobile, DUE_PHONE = mobile, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
         }
