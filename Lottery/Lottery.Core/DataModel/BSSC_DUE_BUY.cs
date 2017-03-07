@@ -22,6 +22,5 @@ namespace Lottery.Core.DataModel
         public string SCD_NUMBERS { get; set; }
         public int SCD_TIMES { get; set; }
         public int SCD_STATE { get; set; }
-        public int SCD_RST_ID { get; set; }
     }
 }

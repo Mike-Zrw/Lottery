@@ -99,7 +99,6 @@
             <PropertyRef Name="SCD_ID" />
           </Key>
           <Property Name="SCD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SCD_RST_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DUE_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DAT_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DATE" Type="date" Nullable="false" />
@@ -550,7 +549,6 @@
           <Property Name="SCD_NUMBERS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SCD_TIMES" Type="Int32" Nullable="false" />
           <Property Name="SCD_STATE" Type="Int32" Nullable="false" />
-          <Property Name="SCD_RST_ID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="BSSC_SUCCESS_BUY">
           <Key>
@@ -827,7 +825,6 @@
           <EntitySetMapping Name="BSSC_DUE_BUY">
             <EntityTypeMapping TypeName="LotteryModel.BSSC_DUE_BUY">
               <MappingFragment StoreEntitySet="BSSC_DUE_BUY">
-                <ScalarProperty Name="SCD_RST_ID" ColumnName="SCD_RST_ID" />
                 <ScalarProperty Name="SCD_STATE" ColumnName="SCD_STATE" />
                 <ScalarProperty Name="SCD_TIMES" ColumnName="SCD_TIMES" />
                 <ScalarProperty Name="SCD_NUMBERS" ColumnName="SCD_NUMBERS" />

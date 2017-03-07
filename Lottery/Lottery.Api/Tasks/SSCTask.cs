@@ -12,9 +12,6 @@ using System.Web;
 
 namespace Lottery.Api.Tasks
 {
-    /// <summary>
-    /// 时时彩网络请求
-    /// </summary>
     public class SSCTask
     {
         private IBSSCService _sscs;
@@ -25,9 +22,6 @@ namespace Lottery.Api.Tasks
         private readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public  BSSC LatestSSC;
         public static readonly int RefreshTime = ConfigHelper.GetConfigInt("SSCRefreshTime");
-        /// <summary>
-        /// 初始化开启线程抓数据
-        /// </summary>
         public void Init()
         {
             LatestSSC = new BSSC();
