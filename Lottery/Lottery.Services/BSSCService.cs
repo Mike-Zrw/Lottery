@@ -51,7 +51,6 @@ namespace Lottery.Service
             return data;
         }
 
-
         public AjaxResult<List<BSSC>> GetBSSC(BSSC bSSC)
         {
             List<BSSC> list = _ssc.Where(m => m.SSC_NUMBER != null && (m.SSC_DATE == bSSC.SSC_DATE || bSSC.SSC_DATE == null) && (m.SSC_STATE == bSSC.SSC_STATE || bSSC.SSC_STATE == null) && (m.SSC_NO == bSSC.SSC_NO || bSSC.SSC_NO == null)).ToList();

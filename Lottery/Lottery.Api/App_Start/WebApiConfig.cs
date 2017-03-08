@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 
 namespace Lottery.Api
@@ -10,8 +11,8 @@ namespace Lottery.Api
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API 配置和服务
-            config.EnableCors(); //配置跨域
+            //跨域配置
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             // Web API 路由
             config.MapHttpAttributeRoutes();
 

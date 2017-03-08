@@ -23,7 +23,7 @@ namespace Lottery.Api.Controllers
         /// <param name="date"></param>
         /// <returns></returns>
         [HttpGet]
-        public AjaxResult<List<BSSC>> GetBSSC(string date, string no)
+        public AjaxResult<List<BSSC>> GetBSSC(string date, string no=null)
         {
             return _ssc.GetBSSC(new BSSC() { SSC_DATE = Convert.ToDateTime(date), SSC_NO = no });
         }

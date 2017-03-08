@@ -26,7 +26,7 @@ namespace Lottery.Api.Controllers
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
         [HttpPost]
-        public AjaxResult<string> Register_GetYzm(string mobile)
+        public AjaxResult<string> Register_GetYzm([FromBody]string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
             if (sum > 0)
@@ -51,7 +51,7 @@ namespace Lottery.Api.Controllers
         /// <param name="yzm">验证码</param>
         /// <returns></returns>
         [HttpPost]
-        public AjaxResult<BDeskUserDto> Register_Reg(string mobile, string yzm)
+        public AjaxResult<BDeskUserDto> Register_Reg([FromBody]string mobile, string yzm)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
             if (sum > 0)
@@ -68,7 +68,7 @@ namespace Lottery.Api.Controllers
         /// <param name="mobile">手机号</param>
         /// <returns></returns>
         [HttpPost]
-        public AjaxResult<string> Login_GetYzm(string mobile)
+        public AjaxResult<string> Login_GetYzm([FromBody]string mobile)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
             if (sum == 0)
@@ -93,7 +93,7 @@ namespace Lottery.Api.Controllers
         /// <param name="yzm">验证码</param>
         /// <returns></returns>
         [HttpPost]
-        public AjaxResult<BDeskUserDto> Login_ByPhone(string mobile, string yzm)
+        public AjaxResult<BDeskUserDto> Login_ByPhone([FromBody]string mobile, string yzm)
         {
             int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
             if (sum == 0)

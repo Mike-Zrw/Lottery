@@ -49,5 +49,20 @@ namespace Lottery.Api
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(IoC.Container);  //webapi
             //DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container)); //controller
         }
+        /// <summary>
+        /// 跨域设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            var req = System.Web.HttpContext.Current.Request;
+            if (req.HttpMethod == "OPTIONS")//过滤options请求，用于js跨域
+            {
+                Response.StatusCode = 200;
+                Response.SubStatusCode = 200;
+                Response.End();
+            }
+        }
     }
 }
