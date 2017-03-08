@@ -178,7 +178,7 @@ Create table PReceiveMsg(
 --时时彩开奖记录表--
 create table BSSC(
 	SSC_ID int identity(1,1) primary key,
-	SSC_NO int, --期号
+	SSC_NO varchar(20), --期号
 	SSC_NUMBER varchar(20),--开奖号
 	SSC_DATE date not null, --开奖日期
 	SSC_WRITEDT datetime, --写入日期（抓取日期）

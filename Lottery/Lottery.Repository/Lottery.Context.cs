@@ -26,12 +26,16 @@ namespace Lottery.Repository
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BChangeMoney> BChangeMoney { get; set; }
         public virtual DbSet<BDeskUser> BDeskUser { get; set; }
         public virtual DbSet<BDrawMoney> BDrawMoney { get; set; }
         public virtual DbSet<BLoginLog> BLoginLog { get; set; }
         public virtual DbSet<BMasters> BMasters { get; set; }
         public virtual DbSet<BMessage> BMessage { get; set; }
         public virtual DbSet<BOperationLog> BOperationLog { get; set; }
+        public virtual DbSet<BSSC> BSSC { get; set; }
+        public virtual DbSet<BSSC_DUE_BUY> BSSC_DUE_BUY { get; set; }
+        public virtual DbSet<BSSC_SUCCESS_BUY> BSSC_SUCCESS_BUY { get; set; }
         public virtual DbSet<BUser> BUser { get; set; }
         public virtual DbSet<BUserBankCard> BUserBankCard { get; set; }
         public virtual DbSet<BUserGroup> BUserGroup { get; set; }
@@ -40,6 +44,7 @@ namespace Lottery.Repository
         public virtual DbSet<PayOnLine> PayOnLine { get; set; }
         public virtual DbSet<PReceiveMsg> PReceiveMsg { get; set; }
         public virtual DbSet<PSendMsg> PSendMsg { get; set; }
+        public virtual DbSet<RSSC_TYPE> RSSC_TYPE { get; set; }
         public virtual DbSet<SDealType> SDealType { get; set; }
         public virtual DbSet<SMasterRoles> SMasterRoles { get; set; }
         public virtual DbSet<SMenu> SMenu { get; set; }
@@ -48,10 +53,5 @@ namespace Lottery.Repository
         public virtual DbSet<SRolePermission> SRolePermission { get; set; }
         public virtual DbSet<SRoles> SRoles { get; set; }
         public virtual DbSet<SPermission> SPermission { get; set; }
-        public virtual DbSet<BSSC_SUCCESS_BUY> BSSC_SUCCESS_BUY { get; set; }
-        public virtual DbSet<RSSC_TYPE> RSSC_TYPE { get; set; }
-        public virtual DbSet<BChangeMoney> BChangeMoney { get; set; }
-        public virtual DbSet<BSSC> BSSC { get; set; }
-        public virtual DbSet<BSSC_DUE_BUY> BSSC_DUE_BUY { get; set; }
     }
 }
