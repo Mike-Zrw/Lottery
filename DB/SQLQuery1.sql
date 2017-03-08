@@ -2,7 +2,7 @@
 CREATE TABLE [BUser](
     [USE_ID] [int] IDENTITY(1,1)  primary key,
     [USE_NAME] [nvarchar](50) not null,--’ ∫≈
-    [USE_PASSWORD] [nvarchar](50) not null ,
+    [USE_PASSWORD] [nvarchar](50)  null ,
     [USE_ACTIVITY] [bit] not null,		-- «∑Òø…”√	
     USE_UGP_ID [int] not null
 )

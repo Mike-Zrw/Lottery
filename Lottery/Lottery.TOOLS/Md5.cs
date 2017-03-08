@@ -12,6 +12,10 @@ namespace Lottery.Tools
 
         public static string MD5(string str)
         {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return null;
+            }
             return EncryptMD5ToHexString(str, System.Text.Encoding.UTF8.CodePage);
         }
         public static string EncryptMD5ToHexString(string s, int EncodingCodePage)

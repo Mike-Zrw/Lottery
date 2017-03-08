@@ -122,7 +122,7 @@
           </Key>
           <Property Name="USE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USE_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="USE_PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="USE_PASSWORD" Type="nvarchar" MaxLength="50" />
           <Property Name="USE_ACTIVITY" Type="bit" Nullable="false" />
           <Property Name="USE_UGP_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -316,7 +316,6 @@
           <EntitySet Name="BSSC" EntityType="LotteryModel.BSSC" />
           <EntitySet Name="BSSC_DUE_BUY" EntityType="LotteryModel.BSSC_DUE_BUY" />
           <EntitySet Name="BSSC_SUCCESS_BUY" EntityType="LotteryModel.BSSC_SUCCESS_BUY" />
-          <EntitySet Name="BUser" EntityType="LotteryModel.BUser" />
           <EntitySet Name="BUserBankCard" EntityType="LotteryModel.BUserBankCard" />
           <EntitySet Name="BUserGroup" EntityType="LotteryModel.BUserGroup" />
           <EntitySet Name="BUserMoney" EntityType="LotteryModel.BUserMoney" />
@@ -333,6 +332,7 @@
           <EntitySet Name="SRolePermission" EntityType="LotteryModel.SRolePermission" />
           <EntitySet Name="SRoles" EntityType="LotteryModel.SRoles" />
           <EntitySet Name="SPermission" EntityType="LotteryModel.SPermission" />
+          <EntitySet Name="BUser" EntityType="LotteryModel.BUser" />
         </EntityContainer>
         <EntityType Name="BChangeMoney">
           <Key>
@@ -444,16 +444,6 @@
           <Property Name="SSB_DATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SSB_SCD_ID" Type="Int32" Nullable="false" />
           <Property Name="SSB_MONEY" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
-        <EntityType Name="BUser">
-          <Key>
-            <PropertyRef Name="USE_ID" />
-          </Key>
-          <Property Name="USE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USE_PASSWORD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USE_ACTIVITY" Type="Boolean" Nullable="false" />
-          <Property Name="USE_UGP_ID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="BUserBankCard">
           <Key>
@@ -592,6 +582,16 @@
           <Property Name="PMS_IMGURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PMS_FUNC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BUser">
+          <Key>
+            <PropertyRef Name="USE_ID" />
+          </Key>
+          <Property Name="USE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USE_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USE_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USE_ACTIVITY" Type="Boolean" Nullable="false" />
+          <Property Name="USE_UGP_ID" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -716,17 +716,6 @@
                 <ScalarProperty Name="SSB_SCD_ID" ColumnName="SSB_SCD_ID" />
                 <ScalarProperty Name="SSB_DATE" ColumnName="SSB_DATE" />
                 <ScalarProperty Name="SSB_ID" ColumnName="SSB_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BUser">
-            <EntityTypeMapping TypeName="LotteryModel.BUser">
-              <MappingFragment StoreEntitySet="BUser">
-                <ScalarProperty Name="USE_UGP_ID" ColumnName="USE_UGP_ID" />
-                <ScalarProperty Name="USE_ACTIVITY" ColumnName="USE_ACTIVITY" />
-                <ScalarProperty Name="USE_PASSWORD" ColumnName="USE_PASSWORD" />
-                <ScalarProperty Name="USE_NAME" ColumnName="USE_NAME" />
-                <ScalarProperty Name="USE_ID" ColumnName="USE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -879,6 +868,17 @@
                 <ScalarProperty Name="PMS_IMGURL" ColumnName="PMS_IMGURL" />
                 <ScalarProperty Name="PMS_DESCRIPTION" ColumnName="PMS_DESCRIPTION" />
                 <ScalarProperty Name="PMS_ID" ColumnName="PMS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUser">
+            <EntityTypeMapping TypeName="LotteryModel.BUser">
+              <MappingFragment StoreEntitySet="BUser">
+                <ScalarProperty Name="USE_UGP_ID" ColumnName="USE_UGP_ID" />
+                <ScalarProperty Name="USE_ACTIVITY" ColumnName="USE_ACTIVITY" />
+                <ScalarProperty Name="USE_PASSWORD" ColumnName="USE_PASSWORD" />
+                <ScalarProperty Name="USE_NAME" ColumnName="USE_NAME" />
+                <ScalarProperty Name="USE_ID" ColumnName="USE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
