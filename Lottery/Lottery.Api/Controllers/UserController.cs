@@ -81,16 +81,18 @@ namespace Lottery.Api.Controllers
             {
                 return new AjaxResult<string>(false, "此手机号没有注册过");
             }
-            AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile, 3064048);
-            if (sendResult.Success)
-            {
-                DataCache.SetCache(mobile + "dlyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), TimeSpan.Zero);
-                return new AjaxResult<string>(true, "短信已经发至您的手机上");
-            }
-            else
-            {
-                return new AjaxResult<string>(false, "短信发送失败：" + sendResult.Error);
-            }
+            //AjaxResult<int> sendResult = new NetEaseSMS().SendMsg(mobile, 3064048);
+            //if (sendResult.Success)
+            //{
+            //    DataCache.SetCache(mobile + "dlyzm", sendResult.Data, DateTime.UtcNow.AddSeconds(60), TimeSpan.Zero);
+            //    return new AjaxResult<string>(true, "短信已经发至您的手机上");
+            //}
+            //else
+            //{
+            //    return new AjaxResult<string>(false, "短信发送失败：" + sendResult.Error);
+            //}
+            DataCache.SetCache(mobile + "dlyzm", 4321, DateTime.UtcNow.AddSeconds(60), TimeSpan.Zero);
+            return new AjaxResult<string>(true, "短信已经发至您的手机上"); ;
         }
         /// <summary>
         /// 登陆验证码核对
@@ -104,13 +106,13 @@ namespace Lottery.Api.Controllers
             dynamic ParamObj = JsonConvert.DeserializeObject(Params);
             string mobile = ParamObj.mobile;
             string yzm = ParamObj.yzm;
-            int sum = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).Count();
-            if (sum == 0)
+            BDeskUserDto user = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_PHONE = mobile }).FirstOrDefault();
+            if (user == null)
                 return new AjaxResult<BDeskUserDto>(false, "此手机号没有注册过");
             object cacheyzm = DataCache.GetCache(mobile + "dlyzm");
             if (cacheyzm == null || cacheyzm.ToString() != yzm)
                 return new AjaxResult<BDeskUserDto>(false, "验证码输入错误");
-            return _duser.Register(new BDeskUserDto() { USE_NAME = mobile, DUE_PHONE = mobile, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
+            return new AjaxResult<BDeskUserDto>(user);
         }
     }
 }

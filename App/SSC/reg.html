@@ -17,13 +17,13 @@
 			}
 			
 			.mui-input-group label {
-				width: 22%;
+				width: 24%;
 			}
 			
 			.mui-input-row label~input,
 			.mui-input-row label~select,
 			.mui-input-row label~textarea {
-				width: 78%;
+				width: 76%;
 			}
 			
 			.mui-checkbox input[type=checkbox],
@@ -66,50 +66,35 @@
 		<script src="js/app.js"></script>
 		<script src="js/jquery.min.js"></script>
 		<script>
-			window.onload = function() {
-					PageInit()
-				}
-				(function($, doc) {
-					$.init();
-					$.plusReady(function() {
-						ListenPhoneNumber();
-						var settings = app.getSettings();
-						var regButton = doc.getElementById('reg');
-						var phoneBox = doc.getElementById('phone');
-						var yzmBox = doc.getElementById('yzm');
-						regButton.addEventListener('tap', function(event) {
-							var regInfo = {
-								account: accountBox.value,
-								password: passwordBox.value,
-								email: emailBox.value
-							};
-
-							app.reg(regInfo, function(err) {
-								if(err) {
-									GlobalObj.toast(err);
-									return;
-								}
-								GlobalObj.toast('注册成功');
-								/*
-								 * 注意：
-								 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
-								 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
-								 */
-								plus.webview.getLaunchWebview().show("pop-in", 200, function() {
-									plus.webview.currentWebview().close("none");
-								});
-								//若启动页不是登录页，则需通过如下方式打开登录页
-								//							$.openWindow({
-								//								url: 'login.html',
-								//								id: 'login',
-								//								show: {
-								//									aniShow: 'pop-in'
-								//								}
-								//							});
-							});
-						});
+			//						window.onload = function() {
+			//								PageInit()
+			//							}
+			var toMain;
+			(function($, doc) {
+				$.init();
+				$.plusReady(function() {
+					var mainPage = $.preload({
+						"id": 'main',
+						"url": 'main.html'
 					});
-				}(mui, document));
+					var main_loaded_flag = false;
+					mainPage.addEventListener("loaded", function() {
+						main_loaded_flag = true;
+					});
+					toMain = function() {
+						//使用定时器的原因：
+						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
+						var id = setInterval(function() {
+							if(main_loaded_flag) {
+								clearInterval(id);
+								$.fire(mainPage, 'show', null);
+								mainPage.show("pop-in");
+							}
+						}, 20);
+					};
+					PageInit()
+				});
+			}(mui, document));
 
 			function PageInit() {
 				var regButton = document.getElementById('reg');
@@ -127,7 +112,9 @@
 					var regurl = WebApiUrl + "User/Register_GetYzm";
 					yzmButton.disabled = true;
 					mui.ajax(regurl, {
-						data: { "": phoneBox.value },
+						data: {
+							"": phoneBox.value
+						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
@@ -150,23 +137,29 @@
 				});
 				regButton.addEventListener('tap', function(event) {
 					var regurl = WebApiUrl + "User/Register_Reg";
-					var regdata = { mobile: phoneBox.value, yzm: yzmBox.value };
+					var regdata = {
+						mobile: phoneBox.value,
+						yzm: yzmBox.value
+					};
 					if(yzmBox.value.length != 4) {
 						GlobalObj.toast('验证码错误');
 					}
 					regButton.disabled = true;
 					jQuery.ajax({
 						url: regurl,
-						data: { "": JSON.stringify(regdata) },
+						data: {
+							"": JSON.stringify(regdata)
+						},
 						dataType: 'json', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						type: 'post',
 						success: function(data) {
 							if(!data.Success) {
 								GlobalObj.toast(data.Error)
-								regButton.removeAttribute("disabled");
+								regButton.removeAttribute("disabled"); 
 							} else {
-
+								GlobalObj.toast('注册成功');
+								toMain();
 							}
 						},
 						error: function(xhr, type, errorThrown) {

@@ -37,28 +37,7 @@
 		return callback();
 	};
 
-	/**
-	 * 新用户注册
-	 **/
-	owner.reg = function(regInfo, callback) {
-		callback = callback || $.noop;
-		regInfo = regInfo || {};
-		regInfo.account = regInfo.account || '';
-		regInfo.password = regInfo.password || '';
-		if(regInfo.account.length < 5) {
-			return callback('用户名最短需要 5 个字符');
-		}
-		if(regInfo.password.length < 6) {
-			return callback('密码最短需要 6 个字符');
-		}
-		if(!checkEmail(regInfo.email)) {
-			return callback('邮箱地址不合法');
-		}
-		var users = JSON.parse(localStorage.getItem('$users') || '[]');
-		users.push(regInfo);
-		localStorage.setItem('$users', JSON.stringify(users));
-		return callback();
-	};
+
 
 	/**
 	 * 获取当前状态
@@ -84,16 +63,6 @@
 		return(email.length > 3 && email.indexOf('@') > -1);
 	};
 
-	/**
-	 * 找回密码
-	 **/
-	owner.forgetPassword = function(email, callback) {
-		callback = callback || $.noop;
-		if(!checkEmail(email)) {
-			return callback('邮箱地址不合法');
-		}
-		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
-	};
 
 	/**
 	 * 获取应用本地配置
@@ -147,10 +116,10 @@
 	}
 }(mui, window.app = {}));
 
-var WebApiUrl = "http://localhost:22023/api/";
+var WebApiUrl = "http://192.168.1.10:8002/api/";
 var GlobalObj = {
 	toast: function(msg) {
-		//		plus.nativeUI.toast(msg);
-		alert(msg)
+				plus.nativeUI.toast(msg);
+//		alert(msg)
 	}
 }

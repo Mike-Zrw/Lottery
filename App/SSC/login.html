@@ -21,13 +21,13 @@
 			}
 			
 			.mui-input-group label {
-				width: 22%;
+				width: 24%;
 			}
 			
 			.mui-input-row label~input,
 			.mui-input-row label~select,
 			.mui-input-row label~textarea {
-				width: 78%;
+				width: 76%;
 			}
 			
 			.mui-checkbox input[type=checkbox],
@@ -90,17 +90,17 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登录</h1>
+			<h1 class="mui-title">时时彩登录</h1>
 		</header>
 		<div class="mui-content">
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
-					<label>账号</label>
-					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+					<label>手机号</label>
+					<input id='phone' type="number" class="mui-input-clear mui-input" placeholder="请输入手机号">
 				</div>
 				<div class="mui-input-row">
-					<label>密码</label>
-					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+					<label>验证码</label>
+					<input id='yzm' type="number" class="mui-input-clear mui-input" placeholder="请输入验证码">
 				</div>
 			</form>
 			<form class="mui-input-group">
@@ -114,8 +114,10 @@
 				</ul>
 			</form>
 			<div class="mui-content-padded">
-				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
-				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+				<button id='yzmbtn' disabled="disabled" class="mui-btn mui-btn-block mui-btn-red">收取验证码</button>
+				<button id='login' disabled="disabled" class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<div class="link-area">
+					<a id='reg'>注册账号</a> <span class="spliter">
 				</div>
 			</div>
 			<div class="mui-content-padded oauth-area">
@@ -125,7 +127,9 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/jquery.min.js"></script> 
 		<script>
+		var toMain;
 			(function($, doc) {
 				$.init({
 					statusBarBackground: '#f7f7f7'
@@ -139,22 +143,22 @@
 						"url": 'main.html'
 					});
 					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded",function () {
+					mainPage.addEventListener("loaded", function() {
 						main_loaded_flag = true;
 					});
-					var toMain = function() {
+					 toMain = function() {
 						//使用定时器的原因：
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
-						var id = setInterval(function () {
-							if(main_loaded_flag){
+						var id = setInterval(function() {
+							if(main_loaded_flag) {
 								clearInterval(id);
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
 							}
-						},20);
+						}, 20);
 					};
 					//检查 "登录状态/锁屏状态" 开始
-					if (settings.autoLogin && state.token && settings.gestures) {
+					if(settings.autoLogin && state.token && settings.gestures) {
 						$.openWindow({
 							url: 'unlock.html',
 							id: 'unlock',
@@ -165,7 +169,7 @@
 								autoShow: false
 							}
 						});
-					} else if (settings.autoLogin && state.token) {
+					} else if(settings.autoLogin && state.token) {
 						toMain();
 					} else {
 						app.setState(null);
@@ -174,10 +178,10 @@
 						var auths = {};
 						var oauthArea = doc.querySelector('.oauth-area');
 						plus.oauth.getServices(function(services) {
-							for (var i in services) {
+							for(var i in services) {
 								var service = services[i];
 								auths[service.id] = service;
-								if (~authBtns.indexOf(service.id)) {
+								if(~authBtns.indexOf(service.id)) {
 									var isInstalled = app.isInstalled(service.id);
 									var btn = document.createElement('div');
 									//如果微信未安装，则为不启用状态
@@ -188,7 +192,7 @@
 								}
 							}
 							$(oauthArea).on('tap', '.oauth-btn', function() {
-								if (this.classList.contains('disabled')) {
+								if(this.classList.contains('disabled')) {
 									plus.nativeUI.toast('您尚未安装微信客户端');
 									return;
 								}
@@ -222,25 +226,13 @@
 						plus.navigator.closeSplashscreen();
 					}, 600);
 					//检查 "登录状态/锁屏状态" 结束
-					var loginButton = doc.getElementById('login');
-					var accountBox = doc.getElementById('account');
-					var passwordBox = doc.getElementById('password');
+					var regButton = document.getElementById('reg');
+					var yzmButton = document.getElementById('yzmbtn');
+					var phoneBox = document.getElementById('phone');
+					var yzmBox = document.getElementById('yzm');
 					var autoLoginButton = doc.getElementById("autoLogin");
 					var regButton = doc.getElementById('reg');
-					var forgetButton = doc.getElementById('forgetPassword');
-					loginButton.addEventListener('tap', function(event) {
-						var loginInfo = {
-							account: accountBox.value,
-							password: passwordBox.value
-						};
-						app.login(loginInfo, function(err) {
-							if (err) {
-								plus.nativeUI.toast(err);
-								return;
-							}
-							toMain();
-						});
-					});
+					PageInit();
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
@@ -268,22 +260,6 @@
 							}
 						});
 					}, false);
-					forgetButton.addEventListener('tap', function(event) {
-						$.openWindow({
-							url: 'forget_password.html',
-							id: 'forget_password',
-							preload: true,
-							show: {
-								aniShow: 'pop-in'
-							},
-							styles: {
-								popGesture: 'hide'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-					}, false);
 					//
 					window.addEventListener('resize', function() {
 						oauthArea.style.display = document.body.clientHeight > 400 ? 'block' : 'none';
@@ -292,7 +268,7 @@
 					var backButtonPress = 0;
 					$.back = function(event) {
 						backButtonPress++;
-						if (backButtonPress > 1) {
+						if(backButtonPress > 1) {
 							plus.runtime.quit();
 						} else {
 							plus.nativeUI.toast('再按一次退出应用');
@@ -304,6 +280,95 @@
 					};
 				});
 			}(mui, document));
+
+			function PageInit() {
+				var loginButton = document.getElementById('login');
+				var yzmButton = document.getElementById('yzmbtn');
+				var phoneBox = document.getElementById('phone');
+				var yzmBox = document.getElementById('yzm');
+				phoneBox.addEventListener("input", function(event) {
+					if(this.value.length == 11) {
+						yzmButton.removeAttribute("disabled");
+					} else {
+						yzmButton.disabled = true;
+					}
+				})
+				yzmButton.addEventListener('tap', function(event) {
+					var regurl = WebApiUrl + "User/Login_GetYzm";
+					yzmButton.disabled = true;
+					mui.ajax(regurl, {
+						data: {
+							"": phoneBox.value
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							var res = JSON.stringify(data);
+							if(data.Success == true) {
+								TimerForYzm();
+								GlobalObj.toast("验证码已发送到您的手机上");
+								loginButton.removeAttribute("disabled");
+							} else {
+								yzmButton.removeAttribute("disabled");
+								GlobalObj.toast(data.Error);
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							GlobalObj.toast('网络请求失败');
+						}
+					});
+				});
+				loginButton.addEventListener('tap', function(event) {
+					var regurl = WebApiUrl + "User/Login_ByPhone";
+					var regdata = {
+						mobile: phoneBox.value,
+						yzm: yzmBox.value
+					};
+					if(yzmBox.value.length != 4) {
+						GlobalObj.toast('验证码错误');
+					}
+					loginButton.disabled = true;
+					jQuery.ajax({
+						url: regurl,
+						data: {
+							"": JSON.stringify(regdata)
+						},
+						dataType: 'json', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						type: 'post',
+						success: function(data) {
+							if(!data.Success) {
+								GlobalObj.toast(data.Error)
+								loginButton.removeAttribute("disabled");
+							} else {
+								toMain();
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							loginButton.removeAttribute("disabled");
+							GlobalObj.toast('网络请求失败');
+						}
+
+					})
+				})
+			}
+			var yzmtimetext = 60;
+
+			function TimerForYzm() {
+				yzmButton = document.getElementById('yzmbtn');
+				yzmtimetext--;
+				yzmButton.innerText = "收取验证码(" + yzmtimetext + ")";
+				if(yzmtimetext == 0) {
+					yzmButton.removeAttribute("disabled");
+					yzmButton.innerText = "收取验证码";
+					yzmtimetext = 60;
+				} else {
+					setTimeout(TimerForYzm, 100)
+				}
+			}
 		</script>
 	</body>
 
