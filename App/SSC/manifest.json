@@ -204,7 +204,13 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"js/mui.min.js",
-					"js/app.js"
+					"js/app.js",
+					"images/qihoo.png",
+					"images/mainicon.png",
+					"images/moneydetail.png",
+					"images/pushmoney.png",
+					"images/getmoney.png",
+					"images/qq.png"
 				],
 				"refer": [
 					"setting.html"
@@ -271,8 +277,18 @@
 					"unlock.html",
 					"forget_password.html",
 					"main.html",
-					"reg.html"
+					"reg.html",
+					"firstOpen.html"
 				],
+				"priority": 0
+			},
+			"firstOpen.html": {
+				"resources": [
+					"images/pushmoney.png",
+					"css/mui.min.css",
+					"images/open.png"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

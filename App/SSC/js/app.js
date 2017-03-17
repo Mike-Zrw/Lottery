@@ -116,7 +116,7 @@
 	}
 }(mui, window.app = {}));
 
-var WebApiUrl = "http://192.168.1.10:8002/api/";
+var WebApiUrl = "http://192.168.0.71:8084/api/";
 var GlobalObj = {
 	toast: function(msg) {
 				plus.nativeUI.toast(msg);

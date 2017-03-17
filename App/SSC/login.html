@@ -123,7 +123,7 @@
 			<div class="mui-content-padded oauth-area">
 
 			</div>
-		</div>
+		</div>	
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
@@ -139,21 +139,33 @@
 					var settings = app.getSettings();
 					var state = app.getState();
 					var mainPage = $.preload({
-						"id": 'main',
-						"url": 'main.html'
+						"id": 'firstOpen',
+						"url": 'firstOpen.html'
 					});
 					var main_loaded_flag = false;
 					mainPage.addEventListener("loaded", function() {
 						main_loaded_flag = true;
 					});
+//					var mainPage = $.preload({
+//						"id": 'main',
+//						"url": 'main.html'
+//					});
+//					var main_loaded_flag = false;
+//					mainPage.addEventListener("loaded", function() {
+//						main_loaded_flag = true;
+//					});
 					 toMain = function() {
 						//使用定时器的原因：
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
 						var id = setInterval(function() {
 							if(main_loaded_flag) {
 								clearInterval(id);
+														
 								$.fire(mainPage, 'show', null);
 								mainPage.show("pop-in");
+//									$.fire(mainPage, 'show', null);
+//								mainPage.show("pop-in");
+							
 							}
 						}, 20);
 					};
@@ -169,7 +181,7 @@
 								autoShow: false
 							}
 						});
-					} else if(settings.autoLogin && state.token) {
+					} else if(settings.autoLogin && state.token) {						
 						toMain();
 					} else {
 						app.setState(null);
@@ -202,6 +214,7 @@
 									waiting.close();
 									plus.nativeUI.toast("登录认证成功");
 									auth.getUserInfo(function() {
+										
 										plus.nativeUI.toast("获取用户信息成功");
 										var name = auth.userInfo.nickname || auth.userInfo.name;
 										app.createState(name, function() {
