@@ -17,14 +17,13 @@
 			}
 			/*左侧滑动 总背景淡粉色*/
 			.mui-off-canvas-left{
-				background-color:#F0CAD3;
-		       /* background-color: rgba(0,0,0,0.1);*/ 
+				background-color:#6FB7FF;
+		        /*background-color: rgba(0,0,'#005AB5',0.1);*/ 
 			}						
 			/*设置菜单滑动高度 粉色*/
 			.mui-table-view{
-				margin-top:90px;
-				background-color:rgba(0,0,0,0.1); /*#DA7E96 粉色*/
-				/*background-color:#DA7E96;*/
+				margin-top:80px;				
+				background-color:rgba(0,0,0,0.1); /*#DA7E96 粉色*/			
 				color:white;			
 			}
 			.mui-table-view .mui-table-view-cell span{			
@@ -36,12 +35,70 @@
 			.mui-table-view-cell.mui-active{
 				background-color: #F0CAD3;
 			}
+			/*设置中间账号奖金红包*/
+	       /* 所有class为menu的div中的ul样式 */
+			div.menu ul
+			{
+			    list-style:none; /* 去掉ul前面的符号 */
+			    margin: 0px; /* 与外界元素的距离为0 */
+			    padding: 0px; /* 与内部元素的距离为0 */
+			    width: auto; /* 宽度根据元素内容调整 */
+			}
+			/* 所有class为menu的div中的ul中的li样式 */
+			div.menu ul li
+			{
+				width:33.33%;							
+			    float:left; /* 向左漂移，将竖排变为横排 */
+			    text-align: center;
+			}
+			div #Menu ul li h4{
+				color:#999999
+			}
+			/* 所有class为menu的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
+			div.menu ul li a, div.menu ul li a:visited
+			{
+			    background-color: #005AB5; /* 背景色 */
+			    border: 1px #859CB4 solid; /* 边框 */
+			    color: #dde4ec; /* 文字颜色 */
+			    display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
+			    line-height: 1.35em; /* 行高 */
+			    padding: 4px 20px; /* 内部填充的距离 */
+			    text-decoration: none; /* 不显示超链接下划线 */
+			    white-space: nowrap; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
+			}
+			div #Menu ul li a, div #Menu ul li a:visited
+			{
+			    background-color: #EFEFF4; /* 背景色 */
+			    border: 1px #4e667d solid; /* 边框 */
+			    color: black; /* 文字颜色 */
+			    font-weight: 800;
+			    display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
+			    line-height: 1.35em; /* 行高 */
+			    padding: 4px 20px; /* 内部填充的距离 */
+			    text-decoration: none; /* 不显示超链接下划线 */
+			    white-space: nowrap; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
+			}
+			/* 所有class为menu的div中的ul中的a样式(鼠标移动到元素中的样式) */
+			div.menu ul li a:hover
+			{
+			    background-color: #bfcbd6; /* 背景色 */
+			    color: #465c71; /* 文字颜色 */
+			    text-decoration: none; /* 不显示超链接下划线 */
+			}
+			/* 所有class为menu的div中的ul中的a样式(鼠标点击元素时的样式) */
+			div.menu ul li a:active
+			{
+			    background-color: #465c71; /* 背景色 */
+			    color: #cfdbe6; /* 文字颜色 */
+			    text-decoration: none; /* 不显示超链接下划线 */
+			}
+
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
-			<h1 class="mui-title" style="font-family:'微软雅黑'">时时彩主页</h1>
+		<header class="mui-bar mui-bar-nav" style="padding-right: 15px;font-family:'微软雅黑';background-color:#46A3FF;">
+			<h1 class="mui-title" style="color: white;">时时彩主页</h1>
 			<!--<button id='setting' class=" mui-pull-right mui-btn-link">设置</button>-->
 		</header>
 		<!-- 侧滑导航根容器 -->
@@ -78,20 +135,45 @@
 		      <div class="mui-scroll">
 		        <!-- 主界面具体展示内容 -->
 		        <div class="mui-content-padded">
-				<p>
-					您好 <span id='account'>pan.li</span>，您已成功登录。
-					<ul>
-						<li>这是mui带登录和设置模板的示例App首页。</li>
-						<li>您可以点击右上角的 “设置” 按钮，进入设置模板，体验div窗体切换示例。</li>
-						<li>在 “设置” 中点击 “退出” 可以 “注销当前账户” 或 “直接关闭应用”。</li>
-						<li>你可以设置 “锁屏图案”，这样可通过手势密码代替输入账号、密码；</li>
+				<!--title top头-->
+				<div>
+					<ul class="mui-table-view" style="margin-top:30px;background-color: #004284;">
+					    <li class="mui-table-view-cell mui-media">
+					        <a class="mui-navigate-right">
+					        	 <img class="mui-media-object mui-pull-left" src="images/mainicon.png">
+					            <div class="mui-media-body">
+					            <span id='account'></span>&nbsp;用户
+					                <p class='mui-ellipsis'>欢迎您！</p>
+					            </div>					        	
+					 			
+					        </a>
+					    </li>   
 					</ul>
-				</p>			
+				</div>		
+				<!--center 中间-->
+				<div style="border:1px solid #000000" class='menu'>
+					<ul>
+						<li><a>账户<h4>￥1000</h4></a></li>
+						<li><a>奖金<h4>￥1550</h4></a></li>
+						<li><a>红包<h4>￥10</h4></a></li>						
+					</ul>								        
+		        </div>
+				<div class="menu" id="Menu" style="margin-top:80px">
+					<ul>
+						<li><a><img src="images/pushmoney.png"/><h4>充值</h4></a></li>
+						<li><a><img src="images/getmoney.png"/><h4>提现</h4></a></li>
+						<li><a><img src="images/moneydetail.png"/><h4>资金明细</h4></a></li>
+					</ul>
+				</div>
+				<div style="margin-top: 80px;height:30em ;">
+					
+				</div>
 			</div>
 		      </div>
 		    </div>  
 		  </div>
 		</div>
+		
 		<!--<div class="mui-content">
 			<div class="mui-content-padded">
 				<p>
@@ -114,7 +196,9 @@
 		<script src="js/app.js"></script>
 		<script>
 			(function($, doc) {
-				$.init();
+				$.init({
+					swipeBack:true //启用右滑关闭功能
+				});
 				var settings = app.getSettings();
 				var account = doc.getElementById('account');
 				//
@@ -125,13 +209,29 @@
 				
 				
 				//加载视图				
-//				$.plusReady(function() {
-//
-//					var settingPage = $.preload({
-//						"id": 'setting',
-//						"url": 'setting.html'
-//					});
-//				})
+			   $.plusReady(function() {
+//					/*预加载*/
+					mui.preload({
+						"url":'setting.html',
+						"id":'setting'
+					})
+					$.oldBack = mui.back;				
+					
+					var backButtonPress = 0;
+					$.back = function(event) {
+					backButtonPress++;
+					if (backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				  };
+				})
+				
 				/*左滑菜单监听**/
 				mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
 					  //获取id
@@ -141,8 +241,15 @@
 						//打开设置详情
 						  mui.openWindow({
 						    id:'setting',
-						    url:'setting.html'
+						    url:'setting.html',
+						    show:{
+							  autoShow:false
+							},
+							title:{//标题配置
+					          text:"设置详情",//标题文字
+						    }						   
 						  });	
+							
 						}					  
 				}) 
 				/*左滑菜单监听**/
@@ -158,45 +265,45 @@
 
 
 
-				$.plusReady(function() {
+//				$.plusReady(function() {
 
-					var settingPage = $.preload({
-						"id": 'setting',
-						"url": 'setting.html'
-					});
-					//设置
-					var settingButton = doc.getElementById('setting');
-					//settingButton.style.display = settings.autoLogin ? 'block' : 'none';
-					settingButton.addEventListener('tap', function(event) {
-						$.openWindow({
-							id: 'setting',
-							show: {
-								aniShow: 'pop-in'
-							},
-							styles: {
-								popGesture: 'hide'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-					});
-					//--
-					$.oldBack = mui.back;
-					var backButtonPress = 0;
-					$.back = function(event) {
-						backButtonPress++;
-						if (backButtonPress > 1) {
-							plus.runtime.quit();
-						} else {
-							plus.nativeUI.toast('再按一次退出应用');
-						}
-						setTimeout(function() {
-							backButtonPress = 0;
-						}, 1000);
-						return false;
-					};
-				});
+//					var settingPage = $.preload({
+//						"id": 'setting',
+//						"url": 'setting.html'
+//					});
+//					//设置
+//					var settingButton = doc.getElementById('setting');
+//					//settingButton.style.display = settings.autoLogin ? 'block' : 'none';
+//					settingButton.addEventListener('tap', function(event) {
+//						$.openWindow({
+//							id: 'setting',
+//							show: {
+//								aniShow: 'pop-in'
+//							},
+//							styles: {
+//								popGesture: 'hide'
+//							},
+//							waiting: {
+//								autoShow: false
+//							}
+//						});
+//					});
+//					//--
+//					$.oldBack = mui.back;
+//					var backButtonPress = 0;
+//					$.back = function(event) {
+//						backButtonPress++;
+//						if (backButtonPress > 1) {
+//							plus.runtime.quit();
+//						} else {
+//							plus.nativeUI.toast('再按一次退出应用');
+//						}
+//						setTimeout(function() {
+//							backButtonPress = 0;
+//						}, 1000);
+//						return false;
+//					};
+//				});
 				
 			}(mui, document));
 		</script>

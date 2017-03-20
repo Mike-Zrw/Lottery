@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div>
+			<img src="images/open.png" id="pushmoney" style="width:100%;height:33em"/>
+			
+		</div>		
+	</body>
+</html>
+<script type="application/javascript">
+	(function($, doc) {
+			var mainPage = $.preload({
+						"id": 'main',
+						"url": 'main.html'
+			});
+			var main_loaded_flag = false;
+			mainPage.addEventListener("loaded", function() {
+				main_loaded_flag = true;
+			});
+			var pushmoney=doc.getElementById('pushmoney');
+//			pushmoney.ontouchmove=function(){
+//				
+//			}
+			$("#pushmoney").ontouchmove(function(){
+				alert("doc");
+				var id = setInterval(function() {
+				if(main_loaded_flag) {
+					clearInterval(id);
+											
+					$.fire(mainPage, 'show', null);
+					mainPage.show("pop-in");
+				
+				}
+				}, 20);
+			});
+//			setTimeout(function(){
+//				alert("lll");
+//				var id = setInterval(function() {
+//				if(main_loaded_flag) {
+//					clearInterval(id);
+//											
+//					$.fire(mainPage, 'show', null);
+//					mainPage.show("pop-in");
+//				
+//				}
+//				}, 20);
+//			},1000)
+	
+	})
+	
+
+</script>
