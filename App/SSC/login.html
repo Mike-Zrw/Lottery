@@ -96,11 +96,11 @@
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
 					<label>手机号</label>
-					<input id='phone' type="number" class="mui-input-clear mui-input" placeholder="请输入手机号">
+					<input id='phone' type="number" value="18721372203" class="mui-input-clear mui-input" placeholder="请输入手机号">
 				</div>
 				<div class="mui-input-row">
 					<label>验证码</label>
-					<input id='yzm' type="number" class="mui-input-clear mui-input" placeholder="请输入验证码">
+					<input id='yzm' type="number" value="4321" class="mui-input-clear mui-input" placeholder="请输入验证码">
 				</div>
 			</form>
 			<form class="mui-input-group">
@@ -138,22 +138,22 @@
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
-					var mainPage = $.preload({
-						"id": 'firstOpen',
-						"url": 'firstOpen.html'
-					});
-					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded", function() {
-						main_loaded_flag = true;
-					});
 //					var mainPage = $.preload({
-//						"id": 'main',
-//						"url": 'main.html'
+//						"id": 'firstOpen',
+//						"url": 'firstOpen.html'
 //					});
 //					var main_loaded_flag = false;
 //					mainPage.addEventListener("loaded", function() {
 //						main_loaded_flag = true;
 //					});
+					var mainPage = $.preload({
+						"id": 'main',
+						"url": 'main.html'
+					});
+					var main_loaded_flag = false;
+					mainPage.addEventListener("loaded", function() {
+						main_loaded_flag = true;
+					});
 					 toMain = function() {
 						//使用定时器的原因：
 						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败

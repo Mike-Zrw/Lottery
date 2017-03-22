@@ -1,7 +1,8 @@
 {
 	"main.html": {
 		"refer": [
-			"setting.html"
+			"setting.html",
+			"index_menu.html"
 		],
 		"resources": [
 			"fonts/mui.ttf",
@@ -11,7 +12,9 @@
 			"images/moneydetail.png",
 			"images/pushmoney.png",
 			"images/getmoney.png",
-			"images/qq.png"
+			"images/qq.png",
+			"js/app.js",
+			"js/mui.min.js"
 		]
 	},
 	"login.html": {
@@ -46,13 +49,27 @@
 			"js/feedback-page.js",
 			"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
 			"js/mui.view.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/iconfont-tianjia.png",
+			"index_menu.html"
+		],
+		"refer": [
+			"index_menu.html"
 		]
 	},
 	"reg.html": {
 		"resources": [
 			"css/mui.min.css",
-			"css/style.css"
+			"css/style.css",
+			"js/app.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"main.html"
 		]
 	},
 	"firstOpen.html": {
@@ -60,6 +77,58 @@
 			"images/pushmoney.png",
 			"css/mui.min.css",
 			"images/open.png"
+		]
+	},
+	"index_menu.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/qq.png",
+			"setting.html"
+		],
+		"refer": [
+			"setting.html",
+			"forget_password.html",
+			"View/BuyHistory.html",
+			"View/Buy.html",
+			"View/PrizeHistory.html"
+		]
+	},
+	"forget_password.html": {
+		"resources": [
+			"css/style.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"View/BuyHistory.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"fonts/mui.ttf"
+		]
+	},
+	"View/Buy.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css"
+		]
+	},
+	"View/PrizeHistory.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css"
 		]
 	}
 }

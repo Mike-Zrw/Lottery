@@ -37,8 +37,6 @@
 		return callback();
 	};
 
-
-
 	/**
 	 * 获取当前状态
 	 **/
@@ -62,7 +60,6 @@
 		email = email || '';
 		return(email.length > 3 && email.indexOf('@') > -1);
 	};
-
 
 	/**
 	 * 获取应用本地配置
@@ -116,10 +113,10 @@
 	}
 }(mui, window.app = {}));
 
-var WebApiUrl = "http://192.168.0.71:8084/api/";
+var WebApiUrl = "http://192.168.0.18:8083/api/";
 var GlobalObj = {
 	toast: function(msg) {
-				plus.nativeUI.toast(msg);
-//		alert(msg)
+		plus.nativeUI.toast(msg);
+		//		alert(msg)
 	}
 }

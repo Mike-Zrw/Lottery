@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -191,7 +191,8 @@
 					"css/mui.min.css",
 					"fonts/mui.ttf",
 					"css/feedback-page.css",
-					"images/iconfont-tianjia.png"
+					"images/iconfont-tianjia.png",
+					"index_menu.html"
 				],
 				"refer": [
 					"login.html"
@@ -213,7 +214,8 @@
 					"images/qq.png"
 				],
 				"refer": [
-					"setting.html"
+					"setting.html",
+					"index_menu.html"
 				],
 				"priority": 1
 			},
@@ -241,7 +243,8 @@
 					"js/mui.min.js",
 					"js/app.js"
 				],
-				"priority": 1
+				"priority": 1,
+				"refer": []
 			},
 			"reg.html": {
 				"href": "reg.html",
@@ -254,7 +257,8 @@
 					"js/jquery.min.js"
 				],
 				"refer": [
-					"login.html"
+					"login.html",
+					"main.html"
 				],
 				"priority": 3
 			},
@@ -287,6 +291,55 @@
 					"images/pushmoney.png",
 					"css/mui.min.css",
 					"images/open.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index_menu.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/qq.png",
+					"setting.html"
+				],
+				"refer": [
+					"forget_password.html",
+					"View/BuyHistory.html",
+					"View/Buy.html",
+					"View/PrizeHistory.html"
+				],
+				"priority": 0
+			},
+			"View/BuyHistory.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"View/Buy.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"View/PrizeHistory.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0

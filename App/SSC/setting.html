@@ -485,13 +485,10 @@
 		var view = viewApi.view;
 		(function($) {
 			//处理view的后退与webview后退
-			var oldBack = $.back;
-			$.back = function() {
-				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-					viewApi.back();
-				} else { //执行webview后退
-					oldBack();
-				}
+			
+			mui.oldBack = mui.back;
+			mui.back = function(event) {
+				plus.webview.currentWebview().hide("slide-out-right", 200);
 			};
 			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
 			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
