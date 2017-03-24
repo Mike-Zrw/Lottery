@@ -22,5 +22,8 @@ namespace Lottery.Core.DTO
         public string USE_PASSWORD { get; set; }
         public bool USE_ACTIVITY { get; set; }
         public int USE_UGP_ID { get; set; }
+        public string DUE_WX_TOKEN { get; set; }
+        public string DUE_QQ_TOKEN { get; set; }
+        public string DUE_WB_TOKEN { get; set; }
     }
 }

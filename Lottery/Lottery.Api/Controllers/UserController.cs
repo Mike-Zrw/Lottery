@@ -114,5 +114,50 @@ namespace Lottery.Api.Controllers
                 return new AjaxResult<BDeskUserDto>(false, "验证码输入错误");
             return new AjaxResult<BDeskUserDto>(user);
         }
+        /// <summary>
+        /// qq登陆
+        /// </summary>
+        /// <param name="qqtoken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public AjaxResult<BDeskUserDto> Login_ByQQ([FromBody]string qqtoken)
+        {
+            if (string.IsNullOrWhiteSpace(qqtoken))
+                return null;
+            BDeskUserDto user = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_QQ_TOKEN = qqtoken }).FirstOrDefault();
+            if (user != null)
+                return new AjaxResult<BDeskUserDto>(user);
+            return _duser.Register(new BDeskUserDto() { USE_NAME = "qq" + qqtoken, DUE_QQ_TOKEN = qqtoken, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
+        }
+        /// <summary>
+        /// wx登陆
+        /// </summary>
+        /// <param name="wxtoken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public AjaxResult<BDeskUserDto> Login_ByWX([FromBody]string wxtoken)
+        {
+            if (string.IsNullOrWhiteSpace(wxtoken))
+                return null;
+            BDeskUserDto user = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_WX_TOKEN = wxtoken }).FirstOrDefault();
+            if (user != null)
+                return new AjaxResult<BDeskUserDto>(user);
+            return _duser.Register(new BDeskUserDto() { USE_NAME = "wx" + wxtoken, DUE_WX_TOKEN = wxtoken, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
+        }
+        /// <summary>
+        /// wb登陆
+        /// </summary>
+        /// <param name="wbtoken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public AjaxResult<BDeskUserDto> Login_ByWB([FromBody]string wbtoken)
+        {
+            if (string.IsNullOrWhiteSpace(wbtoken))
+                return null;
+            BDeskUserDto user = _duser.FindBDeskUser(new Core.DTO.BDeskUserDto() { DUE_WB_TOKEN = wbtoken }).FirstOrDefault();
+            if (user != null)
+                return new AjaxResult<BDeskUserDto>(user);
+            return _duser.Register(new BDeskUserDto() { USE_NAME = "wb" + wbtoken, DUE_WB_TOKEN = wbtoken, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
+        }
     }
 }

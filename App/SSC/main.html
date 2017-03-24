@@ -4,6 +4,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title></title>
 		<link href="css/mui.min.css" rel="stylesheet" />
 
@@ -132,19 +134,52 @@
 	</head>
 
 	<body>
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+			<h1 class="mui-title">用户中心</h1>
+		</header>
+		<!-- 主页面内容容器 -->
 		<div class="mui-content">
-			<!-- 主页面标题 -->
-			<header class="mui-bar mui-bar-nav">
-				<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-				<h1 class="mui-title">标题</h1>
-			</header>
-			<!-- 主页面内容容器 -->
-			<div class="mui-content mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<!-- 主界面具体展示内容 -->
-					<div class="mui-content-padded">
-						<!--title top头-->
-						<!--<div>
+			<div class="mui-slider" id="slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!--支持循环，需要重复图片节点-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="images/cbd.jpg" /></a>
+						<p class="mui-slider-title">静静看这世界</p>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/muwu.jpg" /></a>
+						<p class="mui-slider-title">品一杯清茶</p>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/shuijiao.jpg" /></a>
+						<p class="mui-slider-title">幸福就是两个人一起睡觉</p>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/yuantiao.jpg" /></a>
+						<p class="mui-slider-title">眺望远方</p>
+					</div>
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="images/cbd.jpg" /></a>
+						<p class="mui-slider-title">静静看这世界</p>
+					</div>
+					<!--支持循环，需要重复图片节点-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="images/cbd.jpg" /></a>
+						<p class="mui-slider-title">静静看这世界</p>
+					</div>
+				</div>	
+				<div class="mui-slider-indicator mui-text-right">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+			<div>
+				<!--title top头-->
+				<!--<div>
 							<ul class="mui-table-view" style="margin-top:30px;background-color: #004284;">
 								<li class="mui-table-view-cell mui-media">
 									<a class="mui-navigate-right">
@@ -158,60 +193,69 @@
 								</li>
 							</ul>
 						</div>-->
-						<!--center 中间-->
-						<div style="border:1px solid #000000" class='menu'>
-							<ul>
-								<li>
-									<a>账户
-										<h4>￥1000</h4></a>
-								</li>
-								<li>
-									<a>奖金
-										<h4>￥1550</h4></a>
-								</li>
-								<li>
-									<a>红包
-										<h4>￥10</h4></a>
-								</li>
-							</ul>
-						</div>
-						<div class="menu" id="Menu" style="margin-top:80px">
-							<ul>
-								<li>
-									<a><img src="images/pushmoney.png" />
-										<h4>充值</h4></a>
-								</li>
-								<li>
-									<a><img src="images/getmoney.png" />
-										<h4>提现</h4></a>
-								</li>
-								<li>
-									<a><img src="images/moneydetail.png" />
-										<h4>资金明细</h4></a>
-								</li>
-							</ul>
-						</div>
-						<div style="margin-top: 80px;height:30em ;">
+				<!--center 中间-->
+				<div style="border:1px solid #000000" class='menu'>
+					<ul>
+						<li>
+							<a>账户
+								<h4>￥1000</h4></a>
+						</li>
+						<li>
+							<a>奖金
+								<h4>￥1550</h4></a>
+						</li>
+						<li>
+							<a>红包
+								<h4>￥10</h4></a>
+						</li>
+					</ul>
+				</div>
+				<div class="menu" id="Menu" style="margin-top:80px">
+					<ul>
+						<li>
+							<a><img src="images/pushmoney.png" />
+								<h4 onclick="showIds()">充值</h4></a>
+						</li>
+						<li>
+							<a><img src="images/getmoney.png" />
+								<h4>提现</h4></a>
+						</li>
+						<li>
+							<a><img src="images/moneydetail.png" />
+								<h4>资金明细</h4></a>
+						</li>
+					</ul>
+				</div>
+				<div style="margin-top: 80px;height:30em ;">
 
-						</div>
-					</div>
 				</div>
 			</div>
+
 		</div>
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script src="js/app.js"></script>
 	<script>
+		var showViews = ["main.html", "setting.html", "View/BuyHistory.html", "View/PrizeHistory.html", "View/Buy.html"]
 		mui.plusReady(function() {
-			//			var settings = app.getSettings();
-			//			var account = doc.getElementById('account');
-			//			window.addEventListener('show', function() {
-			//				var state = app.getState();
-			//				account.innerText = state.account;
-			//			}, false);
+			mui("#slider").slider({
+					interval: 5000
+				});
+			var loginpage = plus.webview.getWebviewById("login.html");
+			var loginpage2 = plus.webview.getWebviewById("HBuilder");
+			if(loginpage != undefined)
+				loginpage.close();
+			if(loginpage2 != undefined)
+				loginpage2.close();
+			BackEvent();
 			ReadyForMenu();
 		})
 
+		function showIds() {
+			plus.webview.all().forEach(function(index, item) {
+				console.log(index.id)
+			})
+		}
 		/**
 		 * 显示侧滑菜单
 		 */
@@ -223,14 +267,14 @@
 						'fromLeft': '0',
 						'toLeft': "70%"
 					},
-					'action': 'show'
+					'action': 'none'
 				}, {
 					'view': _menu,
 					'styles': {
 						'fromLeft': "-70%",
 						'toLeft': '0'
 					},
-					'action': 'show'
+					'action': 'none'
 				},
 				function(e) {
 					//					console.log(JSON.stringify(e));
@@ -250,14 +294,14 @@
 						'fromLeft': '70%',
 						'toLeft': "0"
 					},
-					'action': 'show'
+					'action': 'none'
 				}, {
 					'view': _menu,
 					'styles': {
 						'fromLeft': "0",
 						'toLeft': '-70%'
 					},
-					'action': 'show'
+					'action': 'none'
 				},
 				function(e) {
 					//					console.log(JSON.stringify(e));
@@ -290,7 +334,10 @@
 				}
 			});
 			window.addEventListener("menu:close", closeMenu);
-			window.addEventListener("mask:close", function(){console.log(11); _self.setStyle({ mask: "none" });});
+			window.addEventListener("mask:close", function() {
+				console.log(11);
+				_self.setStyle({ mask: "none" });
+			});
 			//重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
 			mui.menu = function() {
 				alert(1)
@@ -320,9 +367,9 @@
 
 		//返回按钮事件
 		function BackEvent() {
-			$.oldBack = mui.back;
+			mui.oldBack = mui.back;
 			var backButtonPress = 0;
-			$.back = function(event) {
+			mui.back = function(event) {
 				backButtonPress++;
 				if(backButtonPress > 1) {
 					plus.runtime.quit();

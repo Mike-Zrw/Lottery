@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="DTO\BDeskUserDto.cs" />
     <Compile Include="DTO\Common\AjaxResult.cs" />
+    <Compile Include="DTO\Common\PageSplit.cs" />
     <Compile Include="DTO\SSC\SSCResult.cs" />
     <Compile Include="IRepository\IDbContext.cs" />
     <Compile Include="IRepository\ILotteryRepository.cs" />

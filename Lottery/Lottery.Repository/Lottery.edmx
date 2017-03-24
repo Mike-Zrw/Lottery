@@ -31,6 +31,9 @@
           <Property Name="DUE_SEX" Type="int" />
           <Property Name="DUE_EMAIL" Type="nvarchar" MaxLength="100" />
           <Property Name="DUE_SUT_ID" Type="int" Nullable="false" />
+          <Property Name="DUE_QQ_TOKEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="DUE_WX_TOKEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="DUE_WB_TOKEN" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="BDrawMoney">
           <Key>
@@ -360,6 +363,9 @@
           <Property Name="DUE_SEX" Type="Int32" />
           <Property Name="DUE_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DUE_SUT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DUE_QQ_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DUE_WX_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DUE_WB_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BDrawMoney">
           <Key>
@@ -615,6 +621,9 @@
           <EntitySetMapping Name="BDeskUser">
             <EntityTypeMapping TypeName="LotteryModel.BDeskUser">
               <MappingFragment StoreEntitySet="BDeskUser">
+                <ScalarProperty Name="DUE_WB_TOKEN" ColumnName="DUE_WB_TOKEN" />
+                <ScalarProperty Name="DUE_WX_TOKEN" ColumnName="DUE_WX_TOKEN" />
+                <ScalarProperty Name="DUE_QQ_TOKEN" ColumnName="DUE_QQ_TOKEN" />
                 <ScalarProperty Name="DUE_SUT_ID" ColumnName="DUE_SUT_ID" />
                 <ScalarProperty Name="DUE_EMAIL" ColumnName="DUE_EMAIL" />
                 <ScalarProperty Name="DUE_SEX" ColumnName="DUE_SEX" />

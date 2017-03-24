@@ -69,5 +69,22 @@ namespace Lottery.Service
                 return new AjaxResult<BSSC>(ssc);
             }
         }
+
+
+        public PageSplit<List<BSSC>> GetBSSC(int start, int limit)
+        {
+            var query = _ssc.GetAll().Where(m => m.SSC_NUMBER != null);
+            List<BSSC> list = query.OrderByDescending(m => m.SSC_NO).Skip(start).Take(limit).ToList();
+            return new PageSplit<List<BSSC>>(list, query.Count(), start, limit);
+        }
+
+
+
+        public PageSplit<List<BSSC>> GetNewSSC(int maxid)
+        {
+            var query = _ssc.GetAll().Where(m => m.SSC_NUMBER != null&&m.SSC_ID>maxid);
+            List<BSSC> list = query.OrderByDescending(m => m.SSC_NO).ToList();
+            return new PageSplit<List<BSSC>>(list, query.Count(), 0, 0);
+        }
     }
 }

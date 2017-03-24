@@ -37,7 +37,7 @@
 		<div class="mui-content">
 			<div class="content">
 				<img src="images/qq.png" style="width:50px;margin-left: 20px;margin-top: 10px; border-radius: 50%;" />
-				<div class="title" style="margin-bottom: 15px;margin-top: 15px;">用户名</div>
+				<div class="title" style="margin-bottom: 15px;margin-top: 15px;width: 200px; overflow: hidden;text-overflow: ellipsis;" id="userName"></div>
 			</div>
 			<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted" style="color: #ddd;">
 				<li class="mui-table-view-cell">
@@ -68,7 +68,9 @@
 			</ul>
 		</div>
 		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
 		<script type="text/javascript" charset="utf-8">
+		document.getElementById("userName").innerText=app.getState().user.USE_NAME;
 			//关于backbutton和menubutton两个按键的说明，在iOS平台不存在，故需隐藏
 			if(!mui.os.android) {
 				var span = document.getElementById("android-only")

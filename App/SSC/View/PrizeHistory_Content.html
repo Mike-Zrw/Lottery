@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style type="text/css">
+			.grid_table {
+				margin-left: 15px;
+				font-size: 14px;
+				color: gray;
+				text-align: center;
+				line-height: 30px;
+			}
+			
+			.mui-table-view-divider {
+				text-align: center;
+				color: black;
+				font-weight: bold;
+			}
+			
+			.ssc_num {
+				display: -moz-inline-box;
+				display: inline-block;
+				width: 30px;
+				color: gray;
+				text-align: center;
+			}
+			
+			.ssc_number {
+				display: -moz-inline-box;
+				display: inline-block;
+				width: 120px;
+				text-align: center;
+				color: rgb(208, 26, 6);
+				font-weight: bold;
+			}
+			
+			.ssc_shiwei {
+				display: -moz-inline-box;
+				display: inline-block;
+				width: 55px;
+				text-align: center;
+				color: gray;
+			}
+			
+			.ssc_gewei {
+				display: -moz-inline-box;
+				display: inline-block;
+				width: 55px;
+				text-align: center;
+				color: gray;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<table class="grid_table">
+				<tr>
+					<td width="30px">期号</td>
+					<td width="120px">开奖号</td>
+					<td width="55px">十位</td>
+					<td width="55px">个位</td>
+					<td></td>
+				</tr>
+			</table>
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<!--<li class="mui-table-view-divider">右侧无导航箭头</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">Item 1</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">Item 2</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">Item 3</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">Item 4</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">Item 5</a>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script>
+			var isplusReady = false;
+			var nowLimit = 20;
+			var maxid = 0;
+			var PageGrid = { Total: 0, Items: [], Start: 0, Limit: 20 };
+			window.onload = pullupRefresh()
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			mui.plusReady(function() {
+				isplusReady = true;
+			})
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				mui.ajax(WebApiUrl + "SSC/GetNewSSC?maxid=" + maxid, {
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					success: function(data) {
+						if(isplusReady)
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+						var table = document.body.querySelector('.mui-table-view');
+						if(data.Total > 0) {
+							for(var i = data.Items.length - 1; i >= 0; i--) {
+								var item = data.Items[i];
+								if(item.SSC_ID > maxid) {
+									maxid = item.SSC_ID;
+								}
+								var num = item.SSC_NO.substr(8, 3);
+								var Date = item.SSC_NO.substr(0, 8);
+								if(!document.getElementById("Date" + Date)) {
+									var titleli = CreateTitleLi(Date);
+									table.insertBefore(titleli, table.firstChild);
+								}
+								var li = CreateLi(item.SSC_NUMBER, num);
+								//下拉刷新，新纪录插到标题前；
+								jQuery(document.getElementById("Date" + Date)).after(li);
+							}
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+						//异常处理；
+						GlobalObj.toast('网络请求失败');
+						console.log("err")
+					}
+				});
+			}
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				mui.ajax(WebApiUrl + "SSC/GetBSSCSplit?start=" + (PageGrid.Start + PageGrid.Limit) + "&limit=" + PageGrid.Limit, {
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					success: function(data) {
+						nowLimit = PageGrid.Start + PageGrid.Limit;
+						PageGrid = data;
+						var table = document.body.querySelector('.mui-table-view');
+						console.log(JSON.stringify(PageGrid))
+						if(PageGrid.Total > 0) {
+							for(var i = 0; i < PageGrid.Items.length; i++) {
+								var item = PageGrid.Items[i];
+								if(item.SSC_ID > maxid) {
+									maxid = item.SSC_ID;
+								}
+								var num = item.SSC_NO.substr(8, 3);
+								var Date = item.SSC_NO.substr(0, 8);
+								if(!document.getElementById("Date" + Date)) {
+									var titleli = CreateTitleLi(Date);
+									table.appendChild(titleli);
+								}
+								var li = CreateLi(item.SSC_NUMBER, num);
+								//下拉刷新，新纪录插到最前面；
+								table.appendChild(li);
+							}
+						}
+						if(isplusReady)
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(nowLimit > PageGrid.Total)
+					},
+					error: function(xhr, type, errorThrown) {
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+						//异常处理；
+						GlobalObj.toast('网络请求失败');
+						console.log("err")
+					}
+				});
+			}
+
+			function CreateLi(sscnumer, num) {
+				var li = document.createElement('li');
+				li.className = 'mui-table-view-cell';
+				var sscnumbers = sscnumer.split(",");
+				li.innerHTML = '<a class="mui-navigate-right"><span class="ssc_num">' + num + '</span>' +
+					'<span class="ssc_number">' + sscnumbers.join("&nbsp;&nbsp;") + '</span>' +
+					'<span  class="ssc_shiwei">' + GetDXDS(sscnumbers[3]) + '</span>' +
+					'<span  class="ssc_gewei">' + GetDXDS(sscnumbers[4]) + '</span></a>'
+				return li;
+			}
+
+			function CreateTitleLi(Date) {
+				var titleli = document.createElement('li');
+				titleli.className = "mui-table-view-divider";
+				titleli.id = "Date" + Date;
+				titleli.innerHTML = Date;
+				return titleli;
+			}
+
+			function GetDXDS(number) {
+				var dx = "小";
+				var ds = "单";
+				if(number > 4) {
+					dx = "大";
+				}
+				if(number % 2 == 0)
+					ds = "双";
+				return dx + ds;
+			}
+			//			if (mui.os.plus) {
+			//				mui.plusReady(function() {
+			//					setTimeout(function() {
+			//						mui('#pullrefresh').pullRefresh().pullupLoading();
+			//					}, 10);
+			//
+			//				});
+			//			} else {
+			//				mui.ready(function() {
+			//					mui('#pullrefresh').pullRefresh().pullupLoading();
+			//				});
+			//			}
+		</script>
+	</body>
+
+</html>

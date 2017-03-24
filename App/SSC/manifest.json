@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "mui_template_login",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "mui登录模板",/*应用名称，程序桌面图标名称*/
+	"name": "乐优彩",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -211,11 +211,16 @@
 					"images/moneydetail.png",
 					"images/pushmoney.png",
 					"images/getmoney.png",
-					"images/qq.png"
+					"images/qq.png",
+					"images/cbd.jpg",
+					"images/yuantiao.jpg",
+					"images/muwu.jpg",
+					"images/shuijiao.jpg"
 				],
 				"refer": [
 					"setting.html",
-					"index_menu.html"
+					"index_menu.html",
+					"firstOpen.html"
 				],
 				"priority": 1
 			},
@@ -290,7 +295,8 @@
 				"resources": [
 					"images/pushmoney.png",
 					"css/mui.min.css",
-					"images/open.png"
+					"images/open.png",
+					"js/mui.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -301,7 +307,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"images/qq.png",
-					"setting.html"
+					"setting.html",
+					"js/app.js"
 				],
 				"refer": [
 					"forget_password.html",
@@ -339,7 +346,19 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"css/style.css"
+					"css/style.css",
+					"View/PrizeHistory_Content.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"View/PrizeHistory_Content.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jquery.min.js"
 				],
 				"refer": [],
 				"priority": 0

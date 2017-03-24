@@ -35,6 +35,24 @@ namespace Lottery.Api.Controllers
         public AjaxResult<List<BSSC>> GetTodaySSC()
         {
             return _ssc.GetBSSC(new BSSC() { SSC_DATE = Convert.ToDateTime(DateTime.Now.ToShortDateString()) });
+        } 
+        /// <summary>
+        /// 获取开奖数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public PageSplit<List<BSSC>> GetBSSCSplit(int start,int limit)
+        {
+            return _ssc.GetBSSC(start,limit);
+        } 
+        /// <summary>
+        /// 界面刷新，获取最新的数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public PageSplit<List<BSSC>> GetNewSSC(int maxid)
+        {
+            return _ssc.GetNewSSC(maxid);
         }
         /// <summary>
         /// 即将开奖数据

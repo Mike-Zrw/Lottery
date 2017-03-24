@@ -23,5 +23,8 @@ namespace Lottery.Core.DataModel
         public Nullable<int> DUE_SEX { get; set; }
         public string DUE_EMAIL { get; set; }
         public int DUE_SUT_ID { get; set; }
+        public string DUE_QQ_TOKEN { get; set; }
+        public string DUE_WX_TOKEN { get; set; }
+        public string DUE_WB_TOKEN { get; set; }
     }
 }

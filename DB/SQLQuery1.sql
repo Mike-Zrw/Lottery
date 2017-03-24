@@ -210,3 +210,10 @@ CREATE TABLE BSSC_SUCCESS_BUY(
 	SSB_SCD_ID int not null,
 	SSB_MONEY date not null,  --ÖÐ½±½ð¶î
 )
+
+
+-----------------------------------------------ÐÞ¸Ä---------------------
+alter table BDeskUser add 
+DUE_QQ_TOKEN nvarchar(100) null,
+DUE_WX_TOKEN nvarchar(100) null,
+DUE_WB_TOKEN nvarchar(100) null

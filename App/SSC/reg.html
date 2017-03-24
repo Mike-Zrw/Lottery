@@ -73,25 +73,16 @@
 			(function($, doc) {
 				$.init();
 				$.plusReady(function() {
-					var mainPage = $.preload({
-						"id": 'main',
-						"url": 'main.html'
-					});
-					var main_loaded_flag = false;
-					mainPage.addEventListener("loaded", function() {
-						main_loaded_flag = true;
-					});
 					toMain = function() {
-						//使用定时器的原因：
-						//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
-						var id = setInterval(function() {
-							if(main_loaded_flag) {
-								clearInterval(id);
-								$.fire(mainPage, 'show', null);
-								mainPage.show("pop-in");
-							}
-						}, 20);
-					};
+						mui.openWindow({
+							url: 'main.html',
+							id: 'main.html',
+							show: {
+								aniShow: 'slide-in-right'
+							},
+							title: '正在加载...',
+						});
+					}
 					PageInit()
 				});
 			}(mui, document));
@@ -156,10 +147,10 @@
 						success: function(data) {
 							if(!data.Success) {
 								GlobalObj.toast(data.Error)
-								regButton.removeAttribute("disabled"); 
+								regButton.removeAttribute("disabled");
 							} else {
 								GlobalObj.toast('注册成功');
-								toMain();
+								app.createState(data.Data,toMain)
 							}
 						},
 						error: function(xhr, type, errorThrown) {

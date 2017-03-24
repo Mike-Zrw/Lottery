@@ -14,5 +14,9 @@ namespace Lottery.Core.IServices
 
         DTO.Common.AjaxResult<List<BSSC>> GetBSSC(DataModel.BSSC bSSC);
         AjaxResult<BSSC> GetNextSSC();
+
+        PageSplit<List<BSSC>> GetBSSC(int start, int limit);
+
+        PageSplit<List<BSSC>> GetNewSSC(int maxid);
     }
 }

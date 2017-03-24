@@ -29,13 +29,15 @@ namespace Lottery.Service
         public AjaxResult<BDeskUserDto> Register(BDeskUserDto user)
         {
             if (userRpt.Where(m => m.USE_NAME.ToLower().Trim().Equals(user.USE_NAME.ToLower().Trim())).Count() > 0)
-            {
                 return new AjaxResult<BDeskUserDto>(false, "用户名已存在");
-            }
-            else if (!string.IsNullOrWhiteSpace(user.DUE_PHONE)&&deskUserRpt.Where(m=>m.DUE_PHONE==user.DUE_PHONE).Count()>0)
-            {
+            else if (!string.IsNullOrWhiteSpace(user.DUE_PHONE) && deskUserRpt.Where(m => m.DUE_PHONE == user.DUE_PHONE).Count() > 0)
                 return new AjaxResult<BDeskUserDto>(false, "此手机号已经注册过");
-            }
+            else if (!string.IsNullOrWhiteSpace(user.DUE_WX_TOKEN) && deskUserRpt.Where(m => m.DUE_WX_TOKEN == user.DUE_WX_TOKEN).Count() > 0)
+                return new AjaxResult<BDeskUserDto>(false, "此微信号已经注册过");
+            else if (!string.IsNullOrWhiteSpace(user.DUE_QQ_TOKEN) && deskUserRpt.Where(m => m.DUE_QQ_TOKEN == user.DUE_QQ_TOKEN).Count() > 0)
+                return new AjaxResult<BDeskUserDto>(false, "此QQ号已经注册过");
+            else if (!string.IsNullOrWhiteSpace(user.DUE_WB_TOKEN) && deskUserRpt.Where(m => m.DUE_WB_TOKEN == user.DUE_WB_TOKEN).Count() > 0)
+                return new AjaxResult<BDeskUserDto>(false, "此微博号已经注册过");
             try
             {
                 repository.BeginTransaction();
@@ -57,7 +59,10 @@ namespace Lottery.Service
                     DUE_SEX = user.DUE_SEX,
                     DUE_SUT_ID = user.DUE_SUT_ID,
                     DUE_USE_ID = buser.USE_ID,
-                    DUE_USERDSPNAME = user.DUE_USERDSPNAME
+                    DUE_USERDSPNAME = user.DUE_USERDSPNAME,
+                    DUE_QQ_TOKEN = user.DUE_QQ_TOKEN,
+                    DUE_WX_TOKEN = user.DUE_WX_TOKEN,
+                    DUE_WB_TOKEN = user.DUE_WB_TOKEN
                 });
 
                 repository.Save();
@@ -95,8 +100,13 @@ namespace Lottery.Service
 
         public IQueryable<BDeskUserDto> FindBDeskUser(BDeskUserDto user)
         {
-            var query = from du in deskUserRpt.Where(m => m.DUE_PHONE == user.DUE_PHONE || user.DUE_PHONE == null)
-                        join u in userRpt.Where(m => (m.USE_NAME == user.USE_NAME || user.USE_NAME == null) && (m.USE_PASSWORD == user.USE_PASSWORD || user.USE_PASSWORD == null)) on du.DUE_USE_ID equals u.USE_ID
+            var query = from du in deskUserRpt.Where(m => (m.DUE_PHONE == user.DUE_PHONE || user.DUE_PHONE == null)
+                                                    && (user.DUE_QQ_TOKEN == null || user.DUE_QQ_TOKEN == m.DUE_QQ_TOKEN)
+                                                    && (user.DUE_WX_TOKEN == null || user.DUE_WX_TOKEN == m.DUE_WX_TOKEN)
+                                                    && (user.DUE_WB_TOKEN == null || user.DUE_WB_TOKEN == m.DUE_WB_TOKEN))
+                        join u in userRpt.Where(m => (m.USE_NAME == user.USE_NAME || user.USE_NAME == null)
+                                                 && (m.USE_PASSWORD == user.USE_PASSWORD || user.USE_PASSWORD == null))
+                        on du.DUE_USE_ID equals u.USE_ID
                         select new BDeskUserDto
                         {
                             DUE_EMAIL = du.DUE_EMAIL,
@@ -112,7 +122,10 @@ namespace Lottery.Service
                             DUE_SEX = du.DUE_SEX,
                             DUE_REALNAME = du.DUE_REALNAME,
                             DUE_REGISTTIME = du.DUE_REGISTTIME,
-                            DUE_USE_ID = du.DUE_USE_ID
+                            DUE_USE_ID = du.DUE_USE_ID,
+                            DUE_QQ_TOKEN = du.DUE_QQ_TOKEN,
+                            DUE_WX_TOKEN = du.DUE_WX_TOKEN,
+                            DUE_WB_TOKEN = du.DUE_WB_TOKEN
                         };
             return query;
         }
