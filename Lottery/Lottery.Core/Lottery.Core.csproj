@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -138,6 +139,7 @@
     <Compile Include="DTO\BDeskUserDto.cs" />
     <Compile Include="DTO\Common\AjaxResult.cs" />
     <Compile Include="DTO\Common\PageSplit.cs" />
+    <Compile Include="DTO\SSC\SSCConfig.cs" />
     <Compile Include="DTO\SSC\SSCResult.cs" />
     <Compile Include="IRepository\IDbContext.cs" />
     <Compile Include="IRepository\ILotteryRepository.cs" />

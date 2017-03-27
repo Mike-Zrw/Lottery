@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <item>
+    <DateStart>10:00:00</DateStart>
+    <DateEnd>22:00:00</DateEnd>
+    <!--后台数据刷新时间（秒）-->
+    <RefreshTime>120</RefreshTime>
+    <!--展示刷新时间（分钟）-->
+    <ShowRefreshTime>10</ShowRefreshTime>
+    <!--总开彩期数-->
+    <Sum>72</Sum>
+  </item>
+  <item>
+    <DateStart>22:00:00</DateStart>
+    <DateEnd>02:30:00</DateEnd>
+    <!--后台数据刷新时间（秒）-->
+    <RefreshTime>120</RefreshTime>
+    <!--展示刷新时间（分钟）-->
+    <ShowRefreshTime>5</ShowRefreshTime>
+    <!--总开彩期数-->
+    <Sum>48</Sum>
+  </item>
+</Config>

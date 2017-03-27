@@ -182,7 +182,7 @@ create table BSSC(
 	SSC_NUMBER varchar(20),--开奖号
 	SSC_DATE date not null, --开奖日期
 	SSC_WRITEDT datetime, --写入日期（抓取日期）
-	SSC_STATE int, --比对状态  0 未必对 1 已比对
+	SSC_STATE int, --比对状态  0 未必对 1 已比对 
 )
 --时时彩玩法表---（一星二星三星。。。）
 create table RSSC_TYPE(

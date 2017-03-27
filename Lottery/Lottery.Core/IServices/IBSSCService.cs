@@ -18,5 +18,9 @@ namespace Lottery.Core.IServices
         PageSplit<List<BSSC>> GetBSSC(int start, int limit);
 
         PageSplit<List<BSSC>> GetNewSSC(int maxid);
+        /// <summary>
+        /// 填充空数据，只在首次启动程序调用
+        /// </summary>
+        void CheckNullData();
     }
 }
