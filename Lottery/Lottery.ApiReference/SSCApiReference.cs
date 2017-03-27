@@ -19,32 +19,40 @@ namespace Lottery.ApiReference
         /// <returns>没有数据返回空对象，接口错误返回null</returns>
         public BSSC GetSSCData()
         {
-            using (HttpResponseMessage response = HttpClient.GetAsync("static/public/ssc/xml/qihaoxml/" + DateTime.Now.ToString("yyyyMMdd") + ".xml?_A=" + new Guid().ToString()).Result)
+            try
             {
-                if (response.IsSuccessStatusCode)
+                using (HttpResponseMessage response = HttpClient.GetAsync("static/public/ssc/xml/qihaoxml/" + DateTime.Now.ToString("yyyyMMdd") + ".xml?_A=" + new Guid().ToString()).Result)
                 {
-                    string result = response.Content.ReadAsStringAsync().Result;
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.LoadXml(result);
-                    XmlNode root = xmlDoc.SelectSingleNode("xml");
-                    if (root.ChildNodes.Count > 0)
+                    if (response.IsSuccessStatusCode)
                     {
-
-                        XmlNode node = root.FirstChild;
-                        BSSC ssc = new BSSC()
+                        string result = response.Content.ReadAsStringAsync().Result;
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.LoadXml(result);
+                        XmlNode root = xmlDoc.SelectSingleNode("xml");
+                        if (root.ChildNodes.Count > 0)
                         {
-                            SSC_NO = node.Attributes["expect"].Value,
-                            SSC_NUMBER = node.Attributes["opencode"].Value
-                        };
-                        return ssc;
+
+                            XmlNode node = root.FirstChild;
+                            BSSC ssc = new BSSC()
+                            {
+                                SSC_NO = node.Attributes["expect"].Value,
+                                SSC_NUMBER = node.Attributes["opencode"].Value
+                            };
+                            return ssc;
+                        }
+                        else
+                            return new BSSC();
+
                     }
                     else
-                        return new BSSC();
-
+                        return null;
                 }
-                else
-                    return null;
             }
+            catch (Exception)
+            {
+                return null;
+            }
+           
         }
     }
 }

@@ -214,6 +214,6 @@ CREATE TABLE BSSC_SUCCESS_BUY(
 
 -----------------------------------------------ÐÞ¸Ä---------------------
 alter table BDeskUser add 
-DUE_QQ_TOKEN nvarchar(100) null,
-DUE_WX_TOKEN nvarchar(100) null,
-DUE_WB_TOKEN nvarchar(100) null
+DUE_QQ_TOKEN nvarchar(200) null,
+DUE_WX_TOKEN nvarchar(200) null,
+DUE_WB_TOKEN nvarchar(200) null

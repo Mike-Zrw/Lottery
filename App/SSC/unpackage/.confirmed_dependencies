@@ -1,158 +1,160 @@
 {
-  "main.html": {
-    "refer": [
-      "setting.html",
-      "index_menu.html",
-      "firstOpen.html"
-    ],
-    "resources": [
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "images/qihoo.png",
-      "images/mainicon.png",
-      "images/moneydetail.png",
-      "images/pushmoney.png",
-      "images/getmoney.png",
-      "images/qq.png",
-      "js/app.js",
-      "js/mui.min.js",
-      "images/cbd.jpg",
-      "images/yuantiao.jpg",
-      "images/muwu.jpg",
-      "images/shuijiao.jpg"
-    ]
-  },
-  "login.html": {
-    "resources": [
-      "js/app.js",
-      "js/jquery.min.js",
-      "js/mui.min.js",
-      "images/sinaweibo.png",
-      "css/mui.min.css",
-      "css/style.css",
-      "images/weixin.png",
-      "images/qq.png",
-      "js/mui.enterfocus.js",
-      "fonts/mui.ttf"
-    ],
-    "refer": [
-      "main.html",
-      "reg.html",
-      "images/qq.png",
-      "firstOpen.html"
-    ]
-  },
-  "setting.html": {
-    "resources": [
-      "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
-      "fonts/mui.ttf",
-      "libs/easymob-webim-sdk/json2.js",
-      "libs/easymob-webim-sdk/jquery-1.11.1.js",
-      "js/mui.locker.js",
-      "js/feedback.js",
-      "css/feedback-page.css",
-      "js/feedback-page.js",
-      "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
-      "js/mui.view.js",
-      "css/mui.min.css",
-      "js/app.js",
-      "js/mui.min.js",
-      "images/iconfont-tianjia.png",
-      "index_menu.html"
-    ],
-    "refer": [
-      "index_menu.html",
-      "login.html"
-    ]
-  },
-  "reg.html": {
-    "resources": [
-      "css/mui.min.css",
-      "css/style.css",
-      "js/app.js",
-      "js/jquery.min.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf"
-    ],
-    "refer": [
-      "main.html"
-    ]
-  },
-  "firstOpen.html": {
-    "resources": [
-      "images/pushmoney.png",
-      "css/mui.min.css",
-      "images/open.png",
-      "js/mui.min.js"
-    ],
-    "refer": []
-  },
-  "index_menu.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "images/qq.png",
-      "setting.html",
-      "js/app.js"
-    ],
-    "refer": [
-      "setting.html",
-      "forget_password.html",
-      "View/BuyHistory.html",
-      "View/Buy.html",
-      "View/PrizeHistory.html"
-    ]
-  },
-  "forget_password.html": {
-    "resources": [
-      "css/style.css",
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css"
-    ],
-    "refer": []
-  },
-  "View/BuyHistory.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/style.css",
-      "fonts/mui.ttf"
-    ],
-    "refer": []
-  },
-  "View/Buy.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/style.css"
-    ],
-    "refer": []
-  },
-  "View/PrizeHistory.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "css/style.css",
-      "View/PrizeHistory_Content.html"
-    ],
-    "refer": []
-  },
-  "View/PrizeHistory_Content.html": {
-    "resources": [
-      "js/app.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/jquery.min.js"
-    ],
-    "refer": []
-  }
+	"main.html": {
+		"refer": [
+			"setting.html",
+			"index_menu.html",
+			"firstOpen.html"
+		],
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/qihoo.png",
+			"images/mainicon.png",
+			"images/moneydetail.png",
+			"images/pushmoney.png",
+			"images/getmoney.png",
+			"images/qq.png",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/cbd.jpg",
+			"images/yuantiao.jpg",
+			"images/muwu.jpg",
+			"images/shuijiao.jpg"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"js/app.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"images/sinaweibo.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"images/weixin.png",
+			"images/qq.png",
+			"js/mui.enterfocus.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"main.html",
+			"reg.html",
+			"images/qq.png",
+			"firstOpen.html"
+		]
+	},
+	"setting.html": {
+		"resources": [
+			"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+			"fonts/mui.ttf",
+			"libs/easymob-webim-sdk/json2.js",
+			"libs/easymob-webim-sdk/jquery-1.11.1.js",
+			"js/mui.locker.js",
+			"js/feedback.js",
+			"css/feedback-page.css",
+			"js/feedback-page.js",
+			"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+			"js/mui.view.js",
+			"css/mui.min.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/iconfont-tianjia.png",
+			"index_menu.html"
+		],
+		"refer": [
+			"index_menu.html",
+			"login.html"
+		]
+	},
+	"reg.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/app.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"main.html"
+		]
+	},
+	"firstOpen.html": {
+		"resources": [
+			"images/pushmoney.png",
+			"css/mui.min.css",
+			"images/open.png",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"index_menu.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/qq.png",
+			"setting.html",
+			"js/app.js"
+		],
+		"refer": [
+			"setting.html",
+			"forget_password.html",
+			"View/BuyHistory.html",
+			"View/Buy.html",
+			"View/PrizeHistory.html"
+		]
+	},
+	"forget_password.html": {
+		"resources": [
+			"css/style.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"View/BuyHistory.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"View/Buy.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css"
+		],
+		"refer": []
+	},
+	"View/PrizeHistory.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"View/PrizeHistory_Content.html"
+		],
+		"refer": [
+			"View/PrizeHistory_Content.html"
+		]
+	},
+	"View/PrizeHistory_Content.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/jquery.min.js"
+		],
+		"refer": []
+	}
 }

@@ -83,7 +83,7 @@
 	}
 }(mui, window.app = {}));
 
-var WebApiUrl = "http://192.168.0.18:8083/api/";
+var WebApiUrl = "http://192.168.0.18:80/Lottery.Api/api/";
 var GlobalObj = {
 	toast: function(msg) {
 		plus.nativeUI.toast(msg);
