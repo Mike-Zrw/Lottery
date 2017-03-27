@@ -335,7 +335,8 @@
 					"js/mui.min.js",
 					"fonts/mui.ttf",
 					"css/mui.min.css",
-					"css/style.css"
+					"css/style.css",
+					"js/jquery.min.js"
 				],
 				"refer": [],
 				"priority": 0

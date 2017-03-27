@@ -8,41 +8,47 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/style.css" rel="stylesheet" />
 		<style>
-			.area {
-				margin: 20px auto 0px auto;
+			.flex-container {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-flow: row wrap;
+				justify-content: space-between;
+				text-align: center;
 			}
 			
-			.mui-input-group:first-child {
-				margin-top: 20px;
+			.title_no,
+			.title_time {
+				font-size: 18px;
+				text-align: center;
 			}
 			
-			.mui-input-group label {
-				width: 22%;
+			.title_no .ssc_no,
+			.lasttime {
+				color: red;
 			}
 			
-			.mui-input-row label~input,
-			.mui-input-row label~select,
-			.mui-input-row label~textarea {
-				width: 78%;
+			.number_line {
+				margin-bottom: 2px;
 			}
 			
-			.mui-checkbox input[type=checkbox],
-			.mui-radio input[type=radio] {
-				top: 6px;
+			.number_line_title {
+				font-size: 14px;
+				color: green;
 			}
 			
-			.mui-content-padded {
-				margin-top: 25px;
+			.number_line .number_num {
+				width: 30px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				float: left;
+				border: 1px solid white;
+				background-color: white;
+				border-radius: 25px;
 			}
-			
-			.mui-btn {
-				padding: 10px;
-			}
-			
-			.mui-input-row label~input,
-			.mui-input-row label~select,
-			.mui-input-row label~textarea {
-				margin-top: 1px;
+			.number_line .number_num_activity{
+				background-color: orangered;
 			}
 		</style>
 	</head>
@@ -53,15 +59,75 @@
 			<h1 class="mui-title">彩票下注</h1>
 		</header>
 		<div class="mui-content">
-			
+			<div class="mui-content-padded">
+				<p class="title_no">第<span id="SSC_NO" class="ssc_no">***</span>期</p>
+				<p class="title_time">本期剩余投注时间<span class="lasttime">1</span>分<span class="lasttime">1</span>秒</p>
+				<div style="padding: 10px 10px;">
+					<div id="tab_type" class="mui-segmented-control">
+						<a class="mui-control-item mui-active" value="5">五星直选</a>
+						<a class="mui-control-item" id="mui-control-item1" value="3">三星直选</a>
+						<a class="mui-control-item" value="2">二星直选</a>
+						<a class="mui-control-item" value="1">一星</a>
+					</div>
+				</div>
+				<div class="number_div" id="number_div">
+
+				</div>
+			</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/app.js"></script>
+		<script src="../js/jquery.min.js"></script>
 		<script>
 			mui.oldBack = mui.back;
 			mui.back = function(event) {
 				plus.webview.currentWebview().hide("slide-out-right", 200);
 			};
+			var NumberText = ["个", "十", "百", "千", "万"]
+			window.onload = function() {
+				var div = document.getElementById("number_div");
+				var html = "";
+				for(var j = 0; j < 5; j++) {
+					html += "<div class='number_line number_line" + j + "'>";
+					html += "<div class='number_line_title'>" + NumberText[j] + "位数字</div>";
+					html += "<div class='flex-container'>";
+					for(var i = 0; i < 10; i++) {
+						html += "<div class='number_num'>" + i + "</div>";
+					}
+					html += "</div>"
+					html += "</div>"
+				}
+				div.innerHTML = html;
+				NumberClick();
+				TabChange()
+			}
+			//号码点击
+			function NumberClick(){
+				$(".number_num").click(function(index,item){
+					if($(this).hasClass("number_num_activity")){
+						$(this).removeClass("number_num_activity")
+					}else{
+						$(this).addClass("number_num_activity")
+					}
+				})
+			}
+			
+			//玩法切换
+			function TabChange() {
+				var tab_type = document.getElementById('tab_type');
+				var items = mui(".mui-control-item");
+				for(var i = 0; i < items.length; i++) {
+					var item = items[i];
+					item.addEventListener("tap", function() {
+						var value = this.getAttribute("value");
+						$(".number_line").hide(); 
+						for(var j = 0; j <parseInt(value); j++) {
+							$(".number_line" + j).show();
+						}
+					})
+				}
+
+			}
 		</script>
 	</body>
 
