@@ -1,5 +1,6 @@
 ﻿using Lottery.Core.DataModel;
 using Lottery.Core.DTO.Common;
+using Lottery.Core.DTO.SSC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Lottery.Core.IServices
         DataModel.BSSC AddFromRemote(DataModel.BSSC data);
 
         DTO.Common.AjaxResult<List<BSSC>> GetBSSC(DataModel.BSSC bSSC);
-        AjaxResult<BSSC> GetNextSSC();
+        AjaxResult<NextSSC> GetNextSSC();
 
         PageSplit<List<BSSC>> GetBSSC(int start, int limit);
 
@@ -22,5 +23,7 @@ namespace Lottery.Core.IServices
         /// 填充空数据，只在首次启动程序调用
         /// </summary>
         void CheckNullData();
+
+        List<RSSC_TYPE> GetSSC_TYPE();
     }
 }

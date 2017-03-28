@@ -15,10 +15,12 @@ namespace Lottery.Service
     {
         private ILotteryRepository _repository;
         private ICrudRepository<BSSC> _ssc;
+        private ICrudRepository<RSSC_TYPE> _rst;
         public BSSCService(ILotteryRepository repository)
         {
             _repository = repository;
             _ssc = repository.GetCrudRepository<BSSC>();
+            _rst = repository.GetCrudRepository<RSSC_TYPE>();
         }
         /// <summary>
         /// 增加一条记录，如果没有当太难的记录，那么初始化当天全部记录
@@ -77,21 +79,30 @@ namespace Lottery.Service
             return new AjaxResult<List<BSSC>>(list);
         }
 
-        public AjaxResult<BSSC> GetNextSSC()
+        public AjaxResult<NextSSC> GetNextSSC()
         {
             if (SSCConfigs.Config == null)
             {
-                return new AjaxResult<BSSC>(false, "今日已结束");
+                return new AjaxResult<NextSSC>(false, "今日已结束");
             }
             DateTime dtYester = DateTime.Now.AddDays(-1);  //当天若已经
             BSSC ssc = _ssc.Where(m => m.SSC_NUMBER == null && m.SSC_DATE == SSCConfigs.Config.BeLoginDt).OrderBy(m => m.SSC_NO).FirstOrDefault();
             if (ssc == null || ssc.SSC_ID == 0)
             {
-                return new AjaxResult<BSSC>(false, "今日已结束");
+                return new AjaxResult<NextSSC>(false, "今日已结束");
             }
             else
             {
-                return new AjaxResult<BSSC>(ssc);
+                BSSC latest = _ssc.Where(m => m.SSC_WRITEDT != null).OrderByDescending(m => m.SSC_ID).FirstOrDefault();
+                DateTime LatestDt = DateTime.Now.AddSeconds(-SSCConfigs.Config.RefreshTime);
+                if (latest != null)
+                {
+                    LatestDt = Convert.ToDateTime(latest.SSC_WRITEDT);
+                }
+                int lastTime = Convert.ToInt32(new TimeSpan(DateTime.Now.Ticks).Subtract(new TimeSpan(LatestDt.AddSeconds(SSCConfigs.Config.RefreshTime).Ticks)).Duration().TotalSeconds);
+                SSCConfigs.NextOpen_LastTime = lastTime;
+                NextSSC nssc = new NextSSC() { NextOpen_LastTime = lastTime, SSC_DATE = ssc.SSC_DATE, SSC_ID = ssc.SSC_ID, SSC_NO = ssc.SSC_NO };
+                return new AjaxResult<NextSSC>(nssc);
             }
         }
 
@@ -118,7 +129,7 @@ namespace Lottery.Service
         public void CheckNullData()
         {
             BSSC Latestssc = _ssc.Where(m => m.SSC_NUMBER != null).OrderByDescending(m => m.SSC_ID).FirstOrDefault();  //最后一个填充的数据
-            List<BSSC> listNull =new List<BSSC>();
+            List<BSSC> listNull = new List<BSSC>();
             if (Latestssc != null)
             {
                 listNull = _ssc.Where(m => m.SSC_NUMBER == null && m.SSC_ID < Latestssc.SSC_ID).ToList();
@@ -136,6 +147,12 @@ namespace Lottery.Service
                 ssc.SSC_WRITEDT = DateTime.Now;
             }
             _ssc.Save();
+        }
+
+
+        public List<RSSC_TYPE> GetSSC_TYPE()
+        {
+            return _rst.GetAll().ToList();
         }
     }
 }

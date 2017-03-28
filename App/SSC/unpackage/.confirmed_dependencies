@@ -131,9 +131,12 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"css/style.css",
-			"js/jquery.min.js"
+			"js/jquery.min.js",
+			"View/Buy_Content.html"
 		],
-		"refer": []
+		"refer": [
+			"View/Buy_Content.html"
+		]
 	},
 	"View/PrizeHistory.html": {
 		"resources": [
@@ -157,5 +160,14 @@
 			"js/jquery.min.js"
 		],
 		"refer": []
+	},
+	"View/Buy_Content.html": {
+		"resources": [
+			"js/app.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/style.css"
+		]
 	}
 }

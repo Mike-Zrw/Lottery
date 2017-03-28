@@ -30,4 +30,5 @@ namespace Lottery.Core.DTO.SSC
         public int[] data { get; set; }
     }
 
+
 }

@@ -31,9 +31,9 @@
           <Property Name="DUE_SEX" Type="int" />
           <Property Name="DUE_EMAIL" Type="nvarchar" MaxLength="100" />
           <Property Name="DUE_SUT_ID" Type="int" Nullable="false" />
-          <Property Name="DUE_QQ_TOKEN" Type="nvarchar" MaxLength="100" />
-          <Property Name="DUE_WX_TOKEN" Type="nvarchar" MaxLength="100" />
-          <Property Name="DUE_WB_TOKEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="DUE_QQ_TOKEN" Type="nvarchar" MaxLength="200" />
+          <Property Name="DUE_WX_TOKEN" Type="nvarchar" MaxLength="200" />
+          <Property Name="DUE_WB_TOKEN" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="BDrawMoney">
           <Key>
@@ -193,8 +193,9 @@
           <Key>
             <PropertyRef Name="RST_ID" />
           </Key>
-          <Property Name="RST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RST_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RST_NAME" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RST_MONEY" Type="int" Nullable="false" />
           <Property Name="RST_PARENT_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SDealType">
@@ -363,9 +364,9 @@
           <Property Name="DUE_SEX" Type="Int32" />
           <Property Name="DUE_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DUE_SUT_ID" Type="Int32" Nullable="false" />
-          <Property Name="DUE_QQ_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DUE_WX_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DUE_WB_TOKEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DUE_QQ_TOKEN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DUE_WX_TOKEN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DUE_WB_TOKEN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BDrawMoney">
           <Key>
@@ -518,6 +519,7 @@
           <Property Name="RST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RST_NAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="RST_PARENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="RST_MONEY" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SDealType">
           <Key>
@@ -798,6 +800,7 @@
           <EntitySetMapping Name="RSSC_TYPE">
             <EntityTypeMapping TypeName="LotteryModel.RSSC_TYPE">
               <MappingFragment StoreEntitySet="RSSC_TYPE">
+                <ScalarProperty Name="RST_MONEY" ColumnName="RST_MONEY" />
                 <ScalarProperty Name="RST_PARENT_ID" ColumnName="RST_PARENT_ID" />
                 <ScalarProperty Name="RST_NAME" ColumnName="RST_NAME" />
                 <ScalarProperty Name="RST_ID" ColumnName="RST_ID" />

@@ -186,8 +186,9 @@ create table BSSC(
 )
 --时时彩玩法表---（一星二星三星。。。）
 create table RSSC_TYPE(
-	RST_ID int identity(1,1) primary key,
+	RST_ID int  primary key,
 	RST_NAME varchar(20) not null,
+	RST_MONEY int not null,
 	RST_PARENT_ID int not null,--父id，例如三星直选的父为三星
 )
 --时时彩购买记录表--
@@ -217,3 +218,10 @@ alter table BDeskUser add
 DUE_QQ_TOKEN nvarchar(200) null,
 DUE_WX_TOKEN nvarchar(200) null,
 DUE_WB_TOKEN nvarchar(200) null
+
+
+insert into RSSC_TYPE
+values(1,'一星',0,0),(2,'二星',0,0),(3,'三星',0,0),(5,'五星',0,0)
+,(11,'一星',10,1),(21,'二星直选',100,2),(22,'二星组选',50,2)
+,(31,'三星直选',1000,3),(32,'三星组三',160,3),(33,'三星组六',160,3)
+,(51,'五星直选',100000,5),(52,'五星通选',20440,5)

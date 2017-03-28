@@ -336,7 +336,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"css/style.css",
-					"js/jquery.min.js"
+					"js/jquery.min.js",
+					"View/Buy_Content.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -360,6 +361,17 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/jquery.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"View/Buy_Content.html": {
+				"resources": [
+					"js/app.js",
+					"js/jquery.min.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0

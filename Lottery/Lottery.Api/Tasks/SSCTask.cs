@@ -57,7 +57,7 @@ namespace Lottery.Api.Tasks
                 if (data == null)//接口错误
                 {
                     //需要伪造一组数据来插入下一期的数据中
-                    AjaxResult<BSSC> nextssc = _sscs.GetNextSSC();
+                    AjaxResult<NextSSC> nextssc = _sscs.GetNextSSC();
                     if (nextssc.Success)  
                     {
                         nextssc.Data.SSC_NO = string.Join(",", new Random(10000).Next(99999).ToString().ToCharArray());

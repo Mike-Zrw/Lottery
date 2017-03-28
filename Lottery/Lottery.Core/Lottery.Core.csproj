@@ -139,6 +139,7 @@
     <Compile Include="DTO\BDeskUserDto.cs" />
     <Compile Include="DTO\Common\AjaxResult.cs" />
     <Compile Include="DTO\Common\PageSplit.cs" />
+    <Compile Include="DTO\SSC\NextSSC.cs" />
     <Compile Include="DTO\SSC\SSCConfig.cs" />
     <Compile Include="DTO\SSC\SSCResult.cs" />
     <Compile Include="IRepository\IDbContext.cs" />

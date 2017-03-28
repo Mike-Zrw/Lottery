@@ -64,6 +64,10 @@ namespace Lottery.Core.DTO.SSC
                 listConfig.Add(config);
             }
         }
+        /// <summary>
+        /// 还有多久开奖（秒）
+        /// </summary>
+        public static int NextOpen_LastTime { get; set; }
     }
     /// <summary>
     /// 时时彩配置

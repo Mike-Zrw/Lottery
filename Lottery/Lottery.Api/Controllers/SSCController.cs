@@ -1,5 +1,6 @@
 ﻿using Lottery.Core.DataModel;
 using Lottery.Core.DTO.Common;
+using Lottery.Core.DTO.SSC;
 using Lottery.Core.IServices;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,15 @@ namespace Lottery.Api.Controllers
         public SSCController(IBSSCService ssc)
         {
             _ssc = ssc;
+        }
+        /// <summary>
+        /// 查询玩法
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public List<RSSC_TYPE> GetSSC_TYPE()
+        {
+            return _ssc.GetSSC_TYPE();
         }
         /// <summary>
         /// 查询时时开奖数据
@@ -59,7 +69,7 @@ namespace Lottery.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public AjaxResult<BSSC> GetNextSSC()
+        public AjaxResult<NextSSC> GetNextSSC()
         {
             return _ssc.GetNextSSC();
         }

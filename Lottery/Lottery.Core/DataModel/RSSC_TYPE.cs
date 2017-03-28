@@ -17,5 +17,6 @@ namespace Lottery.Core.DataModel
         public int RST_ID { get; set; }
         public string RST_NAME { get; set; }
         public int RST_PARENT_ID { get; set; }
+        public int RST_MONEY { get; set; }
     }
 }

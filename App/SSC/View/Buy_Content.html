@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style>
+			.flex-container {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-flow: row wrap;
+				justify-content: space-between;
+				text-align: center;
+			}
+			
+			.title_no,
+			.title_time {
+				font-size: 18px;
+				text-align: center;
+			}
+			
+			.ssc_no,
+			.lasttime,
+			.rednum {
+				color: red;
+			}
+			
+			.number_line {
+				margin-bottom: 2px;
+			}
+			
+			.number_line_title {
+				font-size: 14px;
+				color: green;
+			}
+			
+			.number_line .number_num {
+				width: 30px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				float: left;
+				border: 1px solid white;
+				background-color: white;
+				border-radius: 25px;
+			}
+			
+			.number_line .number_num_activity {
+				background-color: orangered;
+			}
+			
+			.checked_box {
+				overflow: scroll;
+				margin-top: 3px;
+				/*position: absolute;*/
+				/*top: 430px;
+				left: 0;
+				right: 0;
+				bottom: 50px;*/
+				border: 1px solid black;
+				border-bottom: none;
+			}
+			
+			.mui-content {
+				height: 100%;
+				padding: 0px 0px 50px 0px;
+				overflow: auto;
+				background-color: #eaeaea;
+			}
+			
+			.btn_chongzhi {
+				font-weight: bold;
+				background-color: orange;
+			}
+			
+			.btn_buy {
+				font-weight: bold;
+				background-color: aliceblue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content  mui-scroll-wrapper" >
+			<div class="mui-content-padded">
+				<p class="title_time"><span id="SSC_NO" class="ssc_no">***</span>期&nbsp;剩余投注时间
+					<span id="lastMinutes" class="lasttime">1</span>分<span id="lastSeconds" class="lasttime">1</span>秒</p>
+				<div style="padding: 5px 0px;">
+					<div id="tab_type" class="mui-segmented-control">
+						<a class="mui-control-item mui-active" value="51">五星直选</a>
+						<a class="mui-control-item" id="mui-control-item1" value="31">三星直选</a>
+						<a class="mui-control-item" value="21">二星直选</a>
+						<a class="mui-control-item" value="11">一星</a>
+					</div>
+				</div>
+				<div class="number_div" id="number_div">
+
+				</div>
+				<p style="text-align: center;padding: 3px;">选中<span id="sel_sum" class="rednum">3</span>注，共
+					<span id="sel_paymoney" class="rednum">6</span>元.若中奖，奖金 <span id="sel_winmoney" class="rednum">100 </span>元</p>
+				<div style="text-align: center;">
+					<button type="button" id="btn_addnum" class="mui-btn mui-btn-primary" disabled="disabled">确认选号</button>
+				</div>
+			</div>
+			<div class="checked_box" id="checked_box">
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab ">
+			<a class="mui-tab-item btn_chongzhi">账户充值</a>
+			<a class="mui-tab-item btn_buy">立即购买</a>
+		</nav>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script>
+			var isplusReady = false;
+			mui.oldBack = mui.back;
+			mui.back = function(event) {
+				plus.webview.currentWebview().hide("slide-out-right", 200);
+			};
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: InitNextNo
+					}
+				}
+			});
+
+			mui.plusReady(function() {
+				InitPageData();
+				isplusReady = true;
+			})
+			var pageobj = {
+				RST_ID: 0, //玩法
+				Numbers: [],
+				SSC_NO: 0,
+				RSSC_TYPE: [], //所有玩法
+				RSSC_TYPE_SELECTED: {}, //选中的玩法
+				SetNo: function(numb) {
+					this.SSC_NO = numb;
+					$("#SSC_NO").html(numb)
+				},
+				SetLastTime: function(time) {
+					$("#lastSeconds").html(time)
+				},
+				SetRstId: function(rstid) {
+					this.RST_ID = rstid;
+					var obj = this;
+					$.each(this.RSSC_TYPE, function(index, item) {
+						if(item.RST_ID == rstid) {
+							obj.RSSC_TYPE_SELECTED = item;
+							return;
+						}
+					});
+					this.Empty();
+				},
+				Empty: function() {
+					$.each($(".number_num"), function(index, item) {
+						$(item).removeClass("number_num_activity")
+					});
+					this.Numbers = [];
+					$("#btn_addnum").attr("disabled", "disabled");
+				},
+				ChangeNumbers: function() {
+					var obj = this;
+					var selected = $(".number_num_activity");
+					var wan = [],
+						qian = [],
+						bai = [],
+						shi = [],
+						ge = []
+					if(selected.length > 0) {
+						$.each(selected, function(index, item) {
+							switch(item.getAttribute("value")) {
+								case "1":
+									ge.push(parseInt(item.innerText))
+									break;
+								case "2":
+									shi.push(parseInt(item.innerText))
+									break;
+								case "3":
+									bai.push(parseInt(item.innerText))
+									break;
+								case "4":
+									qian.push(parseInt(item.innerText))
+									break;
+								case "5":
+									wan.push(parseInt(item.innerText))
+									break;
+							}
+
+						})
+					}
+					var selectedSum = 0;
+					if(this.RST_ID == 51) {
+						if(wan.length > 0 && qian.length > 0 && bai.length > 0 && shi.length > 0 && ge.length > 0) {
+							selectedSum = wan.length * qian.length * bai.length * shi.length * ge.length;
+							obj.Numbers = [];
+							$.each(wan, function(iw, w) {
+								$.each(qian, function(iq, q) {
+									$.each(bai, function(ib, b) {
+										$.each(shi, function(is, s) {
+											$.each(ge, function(ig, g) {
+												obj.Numbers.push(w + "," + q + "," + b + "," + s + "," + g)
+											});
+										});
+									});
+								})
+							});
+						}
+					} else if(this.RST_ID == 31) {
+						if(bai.length > 0 && shi.length > 0 && ge.length > 0) {
+							selectedSum = bai.length * shi.length * ge.length;
+							obj.Numbers = [];
+							$.each(bai, function(ib, b) {
+								$.each(shi, function(is, s) {
+									$.each(ge, function(ig, g) {
+										obj.Numbers.push(0 + "," + 0 + "," + b + "," + s + "," + g)
+									});
+								});
+							});
+
+						}
+					} else if(this.RST_ID == 21) {
+						if(shi.length > 0 && ge.length > 0) {
+							selectedSum = shi.length * ge.length;
+							obj.Numbers = [];
+							$.each(shi, function(is, s) {
+								$.each(ge, function(ig, g) {
+									obj.Numbers.push(0 + "," + 0 + "," + 0 + "," + s + "," + g)
+								});
+							});
+
+						}
+					} else if(this.RST_ID == 11) {
+						if(ge.length > 0) {
+							selectedSum = ge.length;
+							obj.Numbers = [];
+							$.each(ge, function(ig, g) {
+								obj.Numbers.push(0 + "," + 0 + "," + 0 + "," + 0 + "," + g)
+							});
+						}
+					}
+					$("#sel_sum").html(selectedSum);
+					if(selectedSum > 0 && selectedSum <= 1000) {
+						$("#sel_paymoney").html(2 * selectedSum);
+						$("#sel_winmoney").html(this.RSSC_TYPE_SELECTED.RST_MONEY * selectedSum);
+						$("#btn_addnum").removeAttr("disabled");
+						return;
+					}
+					$("#btn_addnum").attr("disabled", "disabled");
+					if(selectedSum > 1000) {
+						GlobalObj.toast('一次最多购买一千注');
+					}
+					$("#sel_paymoney").html("")
+					$("#sel_winmoney").html("")
+				}
+			}
+			var NumberText = ["个", "十", "百", "千", "万"]
+			window.onload = function() {
+				var div = document.getElementById("number_div");
+				var html = "";
+				for(var j = 0; j < 5; j++) {
+					html += "<div class='number_line number_line" + j + "'>";
+					html += "<div class='number_line_title'>" + NumberText[j] + "位数字</div>";
+					html += "<div class='flex-container'>";
+					for(var i = 0; i < 10; i++) {
+						html += "<div value='" + (j + 1) + "' class='number_num'>" + i + "</div>";
+					}
+					html += "</div>"
+					html += "</div>"
+				}
+				div.innerHTML = html;
+				NumberClick();
+				TabChange();
+				document.getElementById("btn_addnum").addEventListener("tap", function() {
+					AddNum();
+					pageobj.Empty()
+				})
+			}
+			/*
+			 * 添加选中号码
+			 */
+			function AddNum() {
+				console.log(JSON.stringify(pageobj.Numbers))
+				$.each(pageobj.Numbers, function(index, item) {
+					$("#checked_box").prepend('<p RST_ID="' + pageobj.RST_ID + '">' + pageobj.RSSC_TYPE_SELECTED.RST_NAME + '&nbsp;<span class="rednum">' + item + '</span><a style="float: right; padding-right: 3px;" href="#">删除</a></p>')
+				});
+
+			}
+
+			/*
+			 * 号码点击
+			 */
+			function NumberClick() {
+				$(".number_num").click(function(index, item) {
+					if($(this).hasClass("number_num_activity")) {
+						$(this).removeClass("number_num_activity")
+					} else {
+						$(this).addClass("number_num_activity")
+					}
+					pageobj.ChangeNumbers()
+				})
+			}
+
+			/*
+			 * 玩法切换
+			 */
+			function TabChange() {
+				var tab_type = document.getElementById('tab_type');
+				var items = mui(".mui-control-item");
+				for(var i = 0; i < items.length; i++) {
+					var item = items[i];
+					item.addEventListener("tap", function() {
+						var value = this.getAttribute("value");
+						pageobj.SetRstId(value);
+						$(".number_line").hide();
+						for(var j = 0; j < parseInt(value.substr(0, 1)); j++) {
+							$(".number_line" + j).show();
+						}
+					})
+				}
+
+			}
+
+			/*
+			 * 初始后台数据
+			 */
+			function InitPageData() {
+				InintPlayType();
+				InitNextNo();
+			}
+			/*
+			 * 初始化玩法
+			 */
+			function InintPlayType() {
+				mui.ajax(WebApiUrl + "SSC/GetSSC_TYPE", {
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					success: function(data) {
+						pageobj.RSSC_TYPE = data;
+						pageobj.SetRstId(51)
+					},
+					error: function(xhr, type, errorThrown) {
+						GlobalObj.toast('网络请求失败');
+					}
+				});
+
+			}
+			/*
+			 * 获取下一期数据
+			 */
+			function InitNextNo() {
+				mui.ajax(WebApiUrl + "SSC/GetNextSSC", {
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					success: function(data) {
+						pageobj.SetNo(data.Data.SSC_NO);
+						pageobj.SetLastTime(data.Data.NextOpen_LastTime);
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					},
+					error: function(xhr, type, errorThrown) {
+						GlobalObj.toast('网络请求失败');
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>
