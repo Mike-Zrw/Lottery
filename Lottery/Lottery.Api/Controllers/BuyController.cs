@@ -1,6 +1,7 @@
 ﻿using Lottery.Core.DataModel;
 using Lottery.Core.DTO.Common;
 using Lottery.Core.IServices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ using System.Web.Http;
 
 namespace Lottery.Api.Controllers
 {
+    /// <summary>
+    /// 购彩操作
+    /// </summary>
     public class BuyController : ApiController
     {
         private IBSSC_DUE_BUYService _sdb;
@@ -17,9 +21,13 @@ namespace Lottery.Api.Controllers
         {
             _sdb = sdb;
         }
-        public AjaxResult<string> Buy(List<BSSC_DUE_BUY> lists)
+        [HttpPost]
+        public AjaxResult<string> Buy([FromBody]string Params)
         {
-            return _sdb.Buy(lists);
+            dynamic ParamObj = JsonConvert.DeserializeObject(Params);
+            List<BSSC_DUE_BUY> lists = JsonConvert.DeserializeObject(ParamObj.list);
+            string SSC_NO = JsonConvert.DeserializeObject(ParamObj.SSC_NO);
+            return _sdb.Buy(lists, SSC_NO);
         }
     }
 }

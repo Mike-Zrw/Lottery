@@ -49,7 +49,7 @@ CREATE TABLE [SRoles](
 
 --交易类型表
 Create Table SDealType(
-	DAT_ID int identity(1,1) primary key,
+	DAT_ID int  primary key,
 	DAT_Name nvarchar(20) not null,--交易类型名称（例如：支付宝）
 	DAT_ACTIVITY int not null--是否启用
 ) 
@@ -109,7 +109,7 @@ Create Table PayOnLine(
 	POL_DAT_ID int not null,   --交易类型
 	POL_MONEY decimal(18,2) not null,
 	POL_USE_ID int not null,
-	POL_STATE varchar(10) not null,   --订单状态
+	POL_STATE int not null,   --订单状态 0.未确定，1.以确定
 	POL_CONFIRMTIME datetime,--订单确认时间
 )
 --金额变动记录表
@@ -198,7 +198,7 @@ CREATE TABLE BSSC_DUE_BUY(
 	SCD_DUE_ID int not null,
 	SCD_DAT_ID int not null,--支付方式
 	SCD_DATE date not null,
-	SCD_SCC_NO int not null,
+	SCD_SSC_ID int not null,
 	SCD_NUMBERS nvarchar(200) not null, --购买彩票号码，以自定义的规则进行拼接写入
 	SCD_TIMES int not null, --倍数 默认1倍
 	SCD_STATE int not null, --比对状态  0未比对，1 已中奖 2未中奖
@@ -225,3 +225,6 @@ values(1,'一星',0,0),(2,'二星',0,0),(3,'三星',0,0),(5,'五星',0,0)
 ,(11,'一星',10,1),(21,'二星直选',100,2),(22,'二星组选',50,2)
 ,(31,'三星直选',1000,3),(32,'三星组三',160,3),(33,'三星组六',160,3)
 ,(51,'五星直选',100000,5),(52,'五星通选',20440,5)
+
+insert into SDealType
+values(1,'账户余额',1),(2,'支付宝',1),(3,'微信',1)

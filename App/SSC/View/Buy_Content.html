@@ -3,10 +3,12 @@
 
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link href="../css/style.css" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
 		<style>
 			.flex-container {
 				display: -webkit-box;
@@ -67,7 +69,6 @@
 			
 			.mui-content {
 				height: 100%;
-				padding: 0px 0px 50px 0px;
 				overflow: auto;
 				background-color: #eaeaea;
 			}
@@ -85,7 +86,7 @@
 	</head>
 
 	<body>
-		<div id="pullrefresh" class="mui-content  mui-scroll-wrapper" >
+		<div id="pullrefresh" class="mui-content  mui-scroll-wrapper">
 			<div class="mui-content-padded">
 				<p class="title_time"><span id="SSC_NO" class="ssc_no">***</span>期&nbsp;剩余投注时间
 					<span id="lastMinutes" class="lasttime">1</span>分<span id="lastSeconds" class="lasttime">1</span>秒</p>
@@ -100,13 +101,23 @@
 				<div class="number_div" id="number_div">
 
 				</div>
-				<p style="text-align: center;padding: 3px;">选中<span id="sel_sum" class="rednum">3</span>注，共
-					<span id="sel_paymoney" class="rednum">6</span>元.若中奖，奖金 <span id="sel_winmoney" class="rednum">100 </span>元</p>
+				<p style="text-align: center;padding: 3px;">选中<span id="sel_sum" class="rednum">0</span>注，共
+					<span id="sel_paymoney" class="rednum">0</span>元.若中奖，奖金 <span id="sel_winmoney" class="rednum">0</span>元</p>
 				<div style="text-align: center;">
 					<button type="button" id="btn_addnum" class="mui-btn mui-btn-primary" disabled="disabled">确认选号</button>
 				</div>
 			</div>
-			<div class="checked_box" id="checked_box">
+			<div class="checked_box">
+				<ul class="mui-table-view" id="checked_box">
+					<!--<li class="mui-table-view-cell">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red deleteli">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							左滑显示删除按钮
+						</div>
+					</li>-->
+				</ul>
 			</div>
 		</div>
 		<nav class="mui-bar mui-bar-tab ">
@@ -165,6 +176,10 @@
 					});
 					this.Numbers = [];
 					$("#btn_addnum").attr("disabled", "disabled");
+					$("#sel_paymoney").html("0");
+					$("#sel_winmoney").html("0");
+					$("#sel_sum").html("0");
+					$("#btn_addnum").removeAttr("disabled");
 				},
 				ChangeNumbers: function() {
 					var obj = this;
@@ -284,12 +299,33 @@
 				})
 			}
 			/*
+			 * 左滑动删除
+			 */
+			$('#checked_box').on('tap', '.deleteli', function(event) {
+				var elem = this;
+				var li = elem.parentNode.parentNode;
+				mui.confirm('确认删除该条记录？', '', ['确认', '取消'], function(e) {
+					if(e.index == 0) {
+						li.parentNode.removeChild(li);
+					} else {
+						setTimeout(function() {
+							mui.swipeoutClose(li);
+						}, 0);
+					}
+				});
+			});
+			/*
 			 * 添加选中号码
 			 */
 			function AddNum() {
 				console.log(JSON.stringify(pageobj.Numbers))
 				$.each(pageobj.Numbers, function(index, item) {
-					$("#checked_box").prepend('<p RST_ID="' + pageobj.RST_ID + '">' + pageobj.RSSC_TYPE_SELECTED.RST_NAME + '&nbsp;<span class="rednum">' + item + '</span><a style="float: right; padding-right: 3px;" href="#">删除</a></p>')
+					var innerHtml = '<li class="mui-table-view-cell" RST_ID="' + pageobj.RST_ID + '">' +
+						'<div class="mui-slider-right mui-disabled">' +
+						'<a class="mui-btn mui-btn-red deleteli">删除</a>' +
+						'</div>' +
+						'<div class="mui-slider-handle">' + pageobj.RSSC_TYPE_SELECTED.RST_NAME + '&nbsp;<span class="rednum">' + item + '</span></div></li>'
+					$("#checked_box").prepend(innerHtml)
 				});
 
 			}
@@ -319,9 +355,9 @@
 					item.addEventListener("tap", function() {
 						var value = this.getAttribute("value");
 						pageobj.SetRstId(value);
-						$(".number_line").hide();
+						$(".number_line").css("visibility", "hidden");
 						for(var j = 0; j < parseInt(value.substr(0, 1)); j++) {
-							$(".number_line" + j).show();
+							$(".number_line" + j).css("visibility", "visible");
 						}
 					})
 				}

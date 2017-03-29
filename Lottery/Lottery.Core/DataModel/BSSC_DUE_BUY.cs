@@ -19,7 +19,7 @@ namespace Lottery.Core.DataModel
         public int SCD_DUE_ID { get; set; }
         public int SCD_DAT_ID { get; set; }
         public System.DateTime SCD_DATE { get; set; }
-        public int SCD_SCC_NO { get; set; }
+        public int SCD_SSC_ID { get; set; }
         public string SCD_NUMBERS { get; set; }
         public int SCD_TIMES { get; set; }
         public int SCD_STATE { get; set; }

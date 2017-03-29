@@ -11,6 +11,9 @@ using System.Web.Http;
 
 namespace Lottery.Api.Controllers
 {
+    /// <summary>
+    /// 彩票操作
+    /// </summary>
     public class SSCController : ApiController
     {
         private IBSSCService _ssc;

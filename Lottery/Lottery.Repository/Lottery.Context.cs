@@ -34,13 +34,11 @@ namespace Lottery.Repository
         public virtual DbSet<BMessage> BMessage { get; set; }
         public virtual DbSet<BOperationLog> BOperationLog { get; set; }
         public virtual DbSet<BSSC> BSSC { get; set; }
-        public virtual DbSet<BSSC_DUE_BUY> BSSC_DUE_BUY { get; set; }
         public virtual DbSet<BSSC_SUCCESS_BUY> BSSC_SUCCESS_BUY { get; set; }
         public virtual DbSet<BUserBankCard> BUserBankCard { get; set; }
         public virtual DbSet<BUserGroup> BUserGroup { get; set; }
         public virtual DbSet<BUserMoney> BUserMoney { get; set; }
         public virtual DbSet<BUserType> BUserType { get; set; }
-        public virtual DbSet<PayOnLine> PayOnLine { get; set; }
         public virtual DbSet<PReceiveMsg> PReceiveMsg { get; set; }
         public virtual DbSet<PSendMsg> PSendMsg { get; set; }
         public virtual DbSet<RSSC_TYPE> RSSC_TYPE { get; set; }
@@ -53,5 +51,7 @@ namespace Lottery.Repository
         public virtual DbSet<SRoles> SRoles { get; set; }
         public virtual DbSet<SPermission> SPermission { get; set; }
         public virtual DbSet<BUser> BUser { get; set; }
+        public virtual DbSet<BSSC_DUE_BUY> BSSC_DUE_BUY { get; set; }
+        public virtual DbSet<PayOnLine> PayOnLine { get; set; }
     }
 }

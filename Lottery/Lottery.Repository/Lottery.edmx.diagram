@@ -13,13 +13,11 @@
         <EntityTypeShape EntityType="LotteryModel.BMessage" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="LotteryModel.BOperationLog" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="LotteryModel.BSSC" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="LotteryModel.BSSC_DUE_BUY" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="LotteryModel.BSSC_SUCCESS_BUY" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="LotteryModel.BUserBankCard" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="LotteryModel.BUserGroup" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="LotteryModel.BUserMoney" Width="1.5" PointX="8.75" PointY="6.75" />
         <EntityTypeShape EntityType="LotteryModel.BUserType" Width="1.5" PointX="8.75" PointY="9.75" />
-        <EntityTypeShape EntityType="LotteryModel.PayOnLine" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="LotteryModel.PReceiveMsg" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="LotteryModel.PSendMsg" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="LotteryModel.RSSC_TYPE" Width="1.5" PointX="10.75" PointY="4.75" />
@@ -32,6 +30,8 @@
         <EntityTypeShape EntityType="LotteryModel.SRoles" Width="1.5" PointX="6.75" PointY="12.75" />
         <EntityTypeShape EntityType="LotteryModel.SPermission" Width="1.5" PointX="12.75" PointY="9.75" />
         <EntityTypeShape EntityType="LotteryModel.BUser" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="LotteryModel.BSSC_DUE_BUY" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="LotteryModel.PayOnLine" Width="1.5" PointX="3.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

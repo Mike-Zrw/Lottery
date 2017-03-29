@@ -12,6 +12,9 @@ using System.Web.Http;
 
 namespace Lottery.Api.Controllers
 {
+    /// <summary>
+    /// 用户操作
+    /// </summary>
     public class UserController : ApiController
     {
         private IBUserService _user;

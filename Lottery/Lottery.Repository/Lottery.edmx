@@ -105,7 +105,7 @@
           <Property Name="SCD_DUE_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DAT_ID" Type="int" Nullable="false" />
           <Property Name="SCD_DATE" Type="date" Nullable="false" />
-          <Property Name="SCD_SCC_NO" Type="int" Nullable="false" />
+          <Property Name="SCD_SSC_ID" Type="int" Nullable="false" />
           <Property Name="SCD_NUMBERS" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="SCD_TIMES" Type="int" Nullable="false" />
           <Property Name="SCD_STATE" Type="int" Nullable="false" />
@@ -169,7 +169,7 @@
           <Property Name="POL_DAT_ID" Type="int" Nullable="false" />
           <Property Name="POL_MONEY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="POL_USE_ID" Type="int" Nullable="false" />
-          <Property Name="POL_STATE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="POL_STATE" Type="int" Nullable="false" />
           <Property Name="POL_CONFIRMTIME" Type="datetime" />
         </EntityType>
         <EntityType Name="PReceiveMsg">
@@ -202,7 +202,7 @@
           <Key>
             <PropertyRef Name="DAT_ID" />
           </Key>
-          <Property Name="DAT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DAT_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="DAT_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DAT_ACTIVITY" Type="int" Nullable="false" />
         </EntityType>
@@ -318,13 +318,11 @@
           <EntitySet Name="BMessage" EntityType="LotteryModel.BMessage" />
           <EntitySet Name="BOperationLog" EntityType="LotteryModel.BOperationLog" />
           <EntitySet Name="BSSC" EntityType="LotteryModel.BSSC" />
-          <EntitySet Name="BSSC_DUE_BUY" EntityType="LotteryModel.BSSC_DUE_BUY" />
           <EntitySet Name="BSSC_SUCCESS_BUY" EntityType="LotteryModel.BSSC_SUCCESS_BUY" />
           <EntitySet Name="BUserBankCard" EntityType="LotteryModel.BUserBankCard" />
           <EntitySet Name="BUserGroup" EntityType="LotteryModel.BUserGroup" />
           <EntitySet Name="BUserMoney" EntityType="LotteryModel.BUserMoney" />
           <EntitySet Name="BUserType" EntityType="LotteryModel.BUserType" />
-          <EntitySet Name="PayOnLine" EntityType="LotteryModel.PayOnLine" />
           <EntitySet Name="PReceiveMsg" EntityType="LotteryModel.PReceiveMsg" />
           <EntitySet Name="PSendMsg" EntityType="LotteryModel.PSendMsg" />
           <EntitySet Name="RSSC_TYPE" EntityType="LotteryModel.RSSC_TYPE" />
@@ -337,6 +335,8 @@
           <EntitySet Name="SRoles" EntityType="LotteryModel.SRoles" />
           <EntitySet Name="SPermission" EntityType="LotteryModel.SPermission" />
           <EntitySet Name="BUser" EntityType="LotteryModel.BUser" />
+          <EntitySet Name="BSSC_DUE_BUY" EntityType="LotteryModel.BSSC_DUE_BUY" />
+          <EntitySet Name="PayOnLine" EntityType="LotteryModel.PayOnLine" />
         </EntityContainer>
         <EntityType Name="BChangeMoney">
           <Key>
@@ -429,20 +429,6 @@
           <Property Name="SSC_WRITEDT" Type="DateTime" Precision="3" />
           <Property Name="SSC_STATE" Type="Int32" />
         </EntityType>
-        <EntityType Name="BSSC_DUE_BUY">
-          <Key>
-            <PropertyRef Name="SCD_ID" />
-          </Key>
-          <Property Name="SCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SCD_RST_ID" Type="Int32" Nullable="false" />
-          <Property Name="SCD_DUE_ID" Type="Int32" Nullable="false" />
-          <Property Name="SCD_DAT_ID" Type="Int32" Nullable="false" />
-          <Property Name="SCD_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SCD_SCC_NO" Type="Int32" Nullable="false" />
-          <Property Name="SCD_NUMBERS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SCD_TIMES" Type="Int32" Nullable="false" />
-          <Property Name="SCD_STATE" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="BSSC_SUCCESS_BUY">
           <Key>
             <PropertyRef Name="SSB_ID" />
@@ -482,18 +468,6 @@
           </Key>
           <Property Name="SUT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SUT_DESCRIPTION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PayOnLine">
-          <Key>
-            <PropertyRef Name="POL_ID" />
-          </Key>
-          <Property Name="POL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="POL_CREATETIME" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="POL_DAT_ID" Type="Int32" Nullable="false" />
-          <Property Name="POL_MONEY" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="POL_USE_ID" Type="Int32" Nullable="false" />
-          <Property Name="POL_STATE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="POL_CONFIRMTIME" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PReceiveMsg">
           <Key>
@@ -600,6 +574,32 @@
           <Property Name="USE_ACTIVITY" Type="Boolean" Nullable="false" />
           <Property Name="USE_UGP_ID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="BSSC_DUE_BUY">
+          <Key>
+            <PropertyRef Name="SCD_ID" />
+          </Key>
+          <Property Name="SCD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SCD_RST_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DUE_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DAT_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SCD_SSC_ID" Type="Int32" Nullable="false" />
+          <Property Name="SCD_NUMBERS" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SCD_TIMES" Type="Int32" Nullable="false" />
+          <Property Name="SCD_STATE" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PayOnLine">
+          <Key>
+            <PropertyRef Name="POL_ID" />
+          </Key>
+          <Property Name="POL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POL_CREATETIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="POL_DAT_ID" Type="Int32" Nullable="false" />
+          <Property Name="POL_MONEY" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="POL_USE_ID" Type="Int32" Nullable="false" />
+          <Property Name="POL_STATE" Type="Int32" Nullable="false" />
+          <Property Name="POL_CONFIRMTIME" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -705,21 +705,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BSSC_DUE_BUY">
-            <EntityTypeMapping TypeName="LotteryModel.BSSC_DUE_BUY">
-              <MappingFragment StoreEntitySet="BSSC_DUE_BUY">
-                <ScalarProperty Name="SCD_STATE" ColumnName="SCD_STATE" />
-                <ScalarProperty Name="SCD_TIMES" ColumnName="SCD_TIMES" />
-                <ScalarProperty Name="SCD_NUMBERS" ColumnName="SCD_NUMBERS" />
-                <ScalarProperty Name="SCD_SCC_NO" ColumnName="SCD_SCC_NO" />
-                <ScalarProperty Name="SCD_DATE" ColumnName="SCD_DATE" />
-                <ScalarProperty Name="SCD_DAT_ID" ColumnName="SCD_DAT_ID" />
-                <ScalarProperty Name="SCD_DUE_ID" ColumnName="SCD_DUE_ID" />
-                <ScalarProperty Name="SCD_RST_ID" ColumnName="SCD_RST_ID" />
-                <ScalarProperty Name="SCD_ID" ColumnName="SCD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BSSC_SUCCESS_BUY">
             <EntityTypeMapping TypeName="LotteryModel.BSSC_SUCCESS_BUY">
               <MappingFragment StoreEntitySet="BSSC_SUCCESS_BUY">
@@ -762,19 +747,6 @@
               <MappingFragment StoreEntitySet="BUserType">
                 <ScalarProperty Name="SUT_DESCRIPTION" ColumnName="SUT_DESCRIPTION" />
                 <ScalarProperty Name="SUT_ID" ColumnName="SUT_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PayOnLine">
-            <EntityTypeMapping TypeName="LotteryModel.PayOnLine">
-              <MappingFragment StoreEntitySet="PayOnLine">
-                <ScalarProperty Name="POL_CONFIRMTIME" ColumnName="POL_CONFIRMTIME" />
-                <ScalarProperty Name="POL_STATE" ColumnName="POL_STATE" />
-                <ScalarProperty Name="POL_USE_ID" ColumnName="POL_USE_ID" />
-                <ScalarProperty Name="POL_MONEY" ColumnName="POL_MONEY" />
-                <ScalarProperty Name="POL_DAT_ID" ColumnName="POL_DAT_ID" />
-                <ScalarProperty Name="POL_CREATETIME" ColumnName="POL_CREATETIME" />
-                <ScalarProperty Name="POL_ID" ColumnName="POL_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -891,6 +863,34 @@
                 <ScalarProperty Name="USE_PASSWORD" ColumnName="USE_PASSWORD" />
                 <ScalarProperty Name="USE_NAME" ColumnName="USE_NAME" />
                 <ScalarProperty Name="USE_ID" ColumnName="USE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BSSC_DUE_BUY">
+            <EntityTypeMapping TypeName="LotteryModel.BSSC_DUE_BUY">
+              <MappingFragment StoreEntitySet="BSSC_DUE_BUY">
+                <ScalarProperty Name="SCD_STATE" ColumnName="SCD_STATE" />
+                <ScalarProperty Name="SCD_TIMES" ColumnName="SCD_TIMES" />
+                <ScalarProperty Name="SCD_NUMBERS" ColumnName="SCD_NUMBERS" />
+                <ScalarProperty Name="SCD_SSC_ID" ColumnName="SCD_SSC_ID" />
+                <ScalarProperty Name="SCD_DATE" ColumnName="SCD_DATE" />
+                <ScalarProperty Name="SCD_DAT_ID" ColumnName="SCD_DAT_ID" />
+                <ScalarProperty Name="SCD_DUE_ID" ColumnName="SCD_DUE_ID" />
+                <ScalarProperty Name="SCD_RST_ID" ColumnName="SCD_RST_ID" />
+                <ScalarProperty Name="SCD_ID" ColumnName="SCD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayOnLine">
+            <EntityTypeMapping TypeName="LotteryModel.PayOnLine">
+              <MappingFragment StoreEntitySet="PayOnLine">
+                <ScalarProperty Name="POL_CONFIRMTIME" ColumnName="POL_CONFIRMTIME" />
+                <ScalarProperty Name="POL_STATE" ColumnName="POL_STATE" />
+                <ScalarProperty Name="POL_USE_ID" ColumnName="POL_USE_ID" />
+                <ScalarProperty Name="POL_MONEY" ColumnName="POL_MONEY" />
+                <ScalarProperty Name="POL_DAT_ID" ColumnName="POL_DAT_ID" />
+                <ScalarProperty Name="POL_CREATETIME" ColumnName="POL_CREATETIME" />
+                <ScalarProperty Name="POL_ID" ColumnName="POL_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

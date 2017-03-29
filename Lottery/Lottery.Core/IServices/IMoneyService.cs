@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lottery.Core.IServices
 {
-    public interface IBSSC_DUE_BUYService
+    public interface IMoneyService
     {
-        DTO.Common.AjaxResult<string> Buy(List<DataModel.BSSC_DUE_BUY> lists,string SSC_NO);
+        DTO.Common.AjaxResult<string> AddMoney(DataModel.PayOnLine pol);
     }
 }

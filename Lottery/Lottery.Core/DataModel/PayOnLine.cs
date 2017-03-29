@@ -19,7 +19,7 @@ namespace Lottery.Core.DataModel
         public int POL_DAT_ID { get; set; }
         public decimal POL_MONEY { get; set; }
         public int POL_USE_ID { get; set; }
-        public string POL_STATE { get; set; }
+        public int POL_STATE { get; set; }
         public Nullable<System.DateTime> POL_CONFIRMTIME { get; set; }
     }
 }

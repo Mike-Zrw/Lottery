@@ -150,6 +150,7 @@
     <Compile Include="IServices\IBSSCService.cs" />
     <Compile Include="IServices\IBSSC_DUE_BUYService.cs" />
     <Compile Include="IServices\IBUserService.cs" />
+    <Compile Include="IServices\IMoneyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

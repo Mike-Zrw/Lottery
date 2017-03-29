@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Lottery.Service
 {
+    /// <summary>
+    /// 彩票操作
+    /// </summary>
     public class BSSCService : IBSSCService
     {
         private ILotteryRepository _repository;
