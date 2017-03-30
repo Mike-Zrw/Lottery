@@ -46,6 +46,7 @@ namespace Lottery.Service
                 _pol.Add(pol);
                 _cgm.Add(new BChangeMoney() { CGM_MONEY = pol.POL_MONEY, CGM_BEFOREMONEY = oldMoney, CGM_AFTERMONEY = oldMoney + pol.POL_MONEY, CGM_CREATETIME = DateTime.Now, CGM_DESC = "app充值" });
                 _cgm.Save();
+                _repository.Commit();
                 return new AjaxResult<string>((oldMoney + pol.POL_MONEY) + "");
             }
             catch (Exception)

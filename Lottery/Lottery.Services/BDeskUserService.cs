@@ -19,12 +19,14 @@ namespace Lottery.Service
         private ILotteryRepository repository;
         private ICrudRepository<BUser> userRpt;
         private ICrudRepository<BDeskUser> deskUserRpt;
+        private ICrudRepository<BUserMoney> _usm;
 
         public BDeskUserService(ILotteryRepository repository)
         {
             this.repository = repository;
             userRpt = repository.GetCrudRepository<BUser>();
             deskUserRpt = repository.GetCrudRepository<BDeskUser>();
+            _usm = repository.GetCrudRepository<BUserMoney>();
         }
         public AjaxResult<BDeskUserDto> Register(BDeskUserDto user)
         {
@@ -77,8 +79,9 @@ namespace Lottery.Service
             }
         }
 
-        private static BDeskUserDto DeskUserToDto(BUser buser, BDeskUser bdescuser)
+        private BDeskUserDto DeskUserToDto(BUser buser, BDeskUser bdescuser)
         {
+            BUserMoney usm = _usm.Where(m => m.USM_USE_ID == buser.USE_ID).FirstOrDefault();
             return new BDeskUserDto()
             {
                 DUE_EMAIL = bdescuser.DUE_EMAIL,
@@ -94,7 +97,11 @@ namespace Lottery.Service
                 USE_ID = buser.USE_ID,
                 USE_NAME = buser.USE_NAME,
                 USE_PASSWORD = buser.USE_PASSWORD,
-                USE_UGP_ID = buser.USE_UGP_ID
+                USE_UGP_ID = buser.USE_UGP_ID,
+                DUE_QQ_TOKEN = bdescuser.DUE_QQ_TOKEN,
+                DUE_WB_TOKEN = bdescuser.DUE_WB_TOKEN,
+                DUE_WX_TOKEN = bdescuser.DUE_WX_TOKEN,
+                USM_MONEY = usm == null ? 0 : usm.USM_MONEY
             };
         }
 
@@ -107,6 +114,8 @@ namespace Lottery.Service
                         join u in userRpt.Where(m => (m.USE_NAME == user.USE_NAME || user.USE_NAME == null)
                                                  && (m.USE_PASSWORD == user.USE_PASSWORD || user.USE_PASSWORD == null))
                         on du.DUE_USE_ID equals u.USE_ID
+                        join usm in _usm.GetAll() on u.USE_ID equals usm.USM_USE_ID into usmit
+                        from usmr in usmit.DefaultIfEmpty()
                         select new BDeskUserDto
                         {
                             DUE_EMAIL = du.DUE_EMAIL,
@@ -125,7 +134,8 @@ namespace Lottery.Service
                             DUE_USE_ID = du.DUE_USE_ID,
                             DUE_QQ_TOKEN = du.DUE_QQ_TOKEN,
                             DUE_WX_TOKEN = du.DUE_WX_TOKEN,
-                            DUE_WB_TOKEN = du.DUE_WB_TOKEN
+                            DUE_WB_TOKEN = du.DUE_WB_TOKEN,
+                            USM_MONEY = usmr == null ? 0 : usmr.USM_MONEY
                         };
             return query;
         }

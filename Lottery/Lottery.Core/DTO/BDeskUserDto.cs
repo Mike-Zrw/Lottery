@@ -25,5 +25,6 @@ namespace Lottery.Core.DTO
         public string DUE_WX_TOKEN { get; set; }
         public string DUE_QQ_TOKEN { get; set; }
         public string DUE_WB_TOKEN { get; set; }
+        public decimal USM_MONEY { get; set; }
     }
 }

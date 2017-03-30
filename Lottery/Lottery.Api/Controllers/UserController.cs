@@ -162,5 +162,17 @@ namespace Lottery.Api.Controllers
                 return new AjaxResult<BDeskUserDto>(user);
             return _duser.Register(new BDeskUserDto() { USE_NAME = "wb" + wbtoken, DUE_WB_TOKEN = wbtoken, USE_PASSWORD = "", USE_UGP_ID = 1, USE_ACTIVITY = true });
         }
+        /// <summary>
+        /// 重新获取用户信息
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public AjaxResult<BDeskUserDto> GetUserById(int userid)
+        {
+            BDeskUserDto user = _duser.FindBDeskUser(new BDeskUserDto() { }).FirstOrDefault();
+            if (user != null)
+                return new AjaxResult<BDeskUserDto>(user);
+            return new AjaxResult<BDeskUserDto>(false, "", null);
+        }
     }
 }
